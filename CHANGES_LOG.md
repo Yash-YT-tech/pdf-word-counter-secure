@@ -8,6 +8,11 @@
 
 ## 2026-09-15
 
+### `[CHORE]` Phase 5: Cloudflare Wrangler Setup & Deployment Pipeline
+- Installed `wrangler` CLI into `devDependencies` for zero-configuration Cloudflare Pages deployments
+- Added `"deploy": "npm run build && wrangler pages deploy dist"` npm script to `package.json`
+- Verified `public/_headers` prevents search engines from indexing temporary `*.pages.dev` staging URLs
+
 ### `[STYLE]/[QA]` Phase 4: Polish, Favicon Suite & Pre-Deploy QA
 - Generated complete brand identity favicon suite in `public/`:
   - `favicon.svg` (SVG vector logo with emerald shield and document glyph)

@@ -61,6 +61,12 @@ chore: update pdfjs-dist to latest version
 
 ## Commit History
 
+### Phase 5: Deploy & Domain Setup
+
+| # | Hash | Message | Date |
+|---|---|---|---|
+| 10 | `PENDING` | `chore: configure Cloudflare Wrangler and add automated deploy script` | 2026-09-15 |
+
 ### Phase 4: Polish, Favicon Suite & Pre-Deploy QA
 
 | # | Hash | Message | Date |
