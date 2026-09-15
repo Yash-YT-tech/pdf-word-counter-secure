@@ -65,7 +65,7 @@ chore: update pdfjs-dist to latest version
 
 | # | Hash | Message | Date |
 |---|---|---|---|
-| 8 | `pending` | `seo: add 1000+ word editorial guide, FAQ accordion with FAQPage schema, and comprehensive legal pages` | 2026-09-15 |
+| 8 | `5764572` | `seo: add 1000+ word editorial guide, FAQ accordion with FAQPage schema, and comprehensive legal pages` | 2026-09-15 |
 
 ### Phase 2: Core PDF Tool Engine
 
