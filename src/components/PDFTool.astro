@@ -1,0 +1,473 @@
+---
+import DropZone from "./DropZone.astro";
+import StatsDisplay from "./StatsDisplay.astro";
+import PageBreakdown from "./PageBreakdown.astro";
+
+interface Props {
+  highlightMetric?: "words" | "pages" | "characters" | "reading-time";
+}
+
+const { highlightMetric = "words" } = Astro.props;
+---
+
+<div class="space-y-8 w-full" data-highlight={highlightMetric}>
+  <!-- Drop Zone Box & Processing States -->
+  <DropZone />
+
+  <!-- Metric Stats Cards -->
+  <StatsDisplay />
+
+  <!-- Granular Page Breakdown Table -->
+  <PageBreakdown />
+</div>
+
+<script>
+  import {
+    analyzePDF,
+    analyzeMultiplePDFs,
+    formatBytes,
+    exportToCSV,
+    type PDFAnalysisResult,
+  } from "../scripts/pdf-processor";
+
+  let currentResult: PDFAnalysisResult | null = null;
+
+  // DOM Elements
+  const dropzone = document.getElementById("dropzone");
+  const fileInput = document.getElementById("pdf-file-input") as HTMLInputElement | null;
+  const processingState = document.getElementById("processing-state");
+  const processingTitle = document.getElementById("processing-title");
+  const processingSubtitle = document.getElementById("processing-subtitle");
+  const processingProgressBar = document.getElementById("processing-progress-bar");
+  const errorState = document.getElementById("error-state");
+  const errorMessage = document.getElementById("error-message");
+  const errorDismissBtn = document.getElementById("error-dismiss-btn");
+
+  const statsContainer = document.getElementById("stats-container");
+  const fileNameDisplay = document.getElementById("file-name-display");
+  const fileSizeDisplay = document.getElementById("file-size-display");
+  const statWords = document.getElementById("stat-words");
+  const statPages = document.getElementById("stat-pages");
+  const statCharsSpaces = document.getElementById("stat-chars-spaces");
+  const statCharsNoSpaces = document.getElementById("stat-chars-nospaces");
+  const statReadingTime = document.getElementById("stat-reading-time");
+  const statSpeakingTime = document.getElementById("stat-speaking-time");
+  const statWordsPerPage = document.getElementById("stat-words-per-page");
+  const statReadingEase = document.getElementById("stat-reading-ease");
+  const statGradeLevel = document.getElementById("stat-grade-level");
+  const statReadabilityBadge = document.getElementById("stat-readability-badge");
+  const scannedPdfWarning = document.getElementById("scanned-pdf-warning");
+
+  const breakdownContainer = document.getElementById("breakdown-container");
+  const breakdownPageCountBadge = document.getElementById("breakdown-page-count-badge");
+  const pageBreakdownTbody = document.getElementById("page-breakdown-tbody");
+  const pageSearchInput = document.getElementById("page-search-input") as HTMLInputElement | null;
+
+  const copySummaryBtn = document.getElementById("copy-summary-btn");
+  const copyIcon = document.getElementById("copy-icon");
+  const copiedIcon = document.getElementById("copied-icon");
+  const copyBtnText = document.getElementById("copy-btn-text");
+  const exportCsvBtn = document.getElementById("export-csv-btn");
+  const resetBtn = document.getElementById("reset-btn");
+
+  const toastNotification = document.getElementById("toast-notification");
+  const toastMessage = document.getElementById("toast-message");
+
+  let toastTimer: any = null;
+  function showToast(msg: string) {
+    if (!toastNotification || !toastMessage) return;
+    toastMessage.textContent = msg;
+    toastNotification.classList.remove("translate-y-8", "opacity-0", "pointer-events-none");
+    toastNotification.classList.add("translate-y-0", "opacity-100");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastNotification.classList.add("translate-y-8", "opacity-0", "pointer-events-none");
+      toastNotification.classList.remove("translate-y-0", "opacity-100");
+    }, 2500);
+  }
+
+  function showError(msg: string) {
+    if (errorMessage && errorState) {
+      errorMessage.textContent = msg;
+      errorState.classList.remove("hidden");
+    }
+    if (processingState) processingState.classList.add("hidden");
+    if (dropzone) dropzone.classList.remove("hidden");
+  }
+
+  function hideError() {
+    if (errorState) errorState.classList.add("hidden");
+  }
+
+  // Smooth Count-Up Animation (Emil Kowalski Design Engineering)
+  function animateCount(el: HTMLElement | null, endVal: number, duration = 650, suffix = "") {
+    if (!el) return;
+    if (endVal === 0) {
+      el.textContent = "0" + suffix;
+      return;
+    }
+    const startTime = performance.now();
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(endVal * ease);
+      el.textContent = val.toLocaleString() + suffix;
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = endVal.toLocaleString() + suffix;
+      }
+    }
+    requestAnimationFrame(update);
+  }
+
+  async function handleFiles(files: FileList | File[]) {
+    if (!files || files.length === 0) return;
+
+    const validFiles: File[] = [];
+    for (let i = 0; i < files.length; i++) {
+      const f = files[i];
+      if (f.name.toLowerCase().endsWith(".pdf") || f.type === "application/pdf") {
+        validFiles.push(f);
+      }
+    }
+
+    if (validFiles.length === 0) {
+      showError("Please select valid PDF document(s) (.pdf).");
+      return;
+    }
+
+    hideError();
+
+    // Show processing state
+    if (dropzone) dropzone.classList.add("hidden");
+    if (statsContainer) statsContainer.classList.add("hidden");
+    if (breakdownContainer) breakdownContainer.classList.add("hidden");
+    if (processingState) processingState.classList.remove("hidden");
+    if (processingProgressBar) processingProgressBar.style.width = "5%";
+
+    try {
+      if (validFiles.length === 1) {
+        const file = validFiles[0];
+        const result = await analyzePDF(file, (current, total) => {
+          if (processingTitle) {
+            processingTitle.textContent = `Analyzing page ${current} of ${total}...`;
+          }
+          if (processingSubtitle) {
+            processingSubtitle.textContent = `${Math.round((current / total) * 100)}% complete`;
+          }
+          if (processingProgressBar) {
+            processingProgressBar.style.width = `${Math.max(5, Math.round((current / total) * 100))}%`;
+          }
+        });
+
+        currentResult = result;
+
+        // Hide processing state
+        if (processingState) processingState.classList.add("hidden");
+
+        // Populate File Info
+        if (fileNameDisplay) fileNameDisplay.textContent = result.fileName;
+        if (fileSizeDisplay) fileSizeDisplay.textContent = formatBytes(result.fileSizeBytes);
+
+        // Animated Stats
+        animateCount(statWords, result.totalWords);
+        animateCount(statPages, result.totalPages);
+        animateCount(statCharsSpaces, result.totalCharacters);
+        animateCount(statCharsNoSpaces, result.totalCharactersNoSpaces);
+        if (statReadingTime) statReadingTime.textContent = `${result.estimatedReadingTimeMinutes} min`;
+        if (statSpeakingTime) statSpeakingTime.textContent = `${result.estimatedSpeakingTimeMinutes} min`;
+
+        const wordsPerPage = result.totalPages > 0 ? Math.round(result.totalWords / result.totalPages) : 0;
+        animateCount(statWordsPerPage, wordsPerPage);
+
+        // Readability
+        if (statReadingEase) {
+          animateCount(statReadingEase, result.readability.readingEase, 650, " / 100");
+        }
+        if (statGradeLevel) {
+          statGradeLevel.textContent = `Grade Level: ${result.readability.gradeLevel}`;
+        }
+        if (statReadabilityBadge) {
+          statReadabilityBadge.textContent = result.readability.readingLevelLabel;
+        }
+
+        // Scanned Document Alert
+        if (scannedPdfWarning) {
+          if (result.isScannedOrImageOnly) {
+            scannedPdfWarning.classList.remove("hidden");
+          } else {
+            scannedPdfWarning.classList.add("hidden");
+          }
+        }
+
+        // Populate Page Breakdown Table
+        if (breakdownPageCountBadge) {
+          breakdownPageCountBadge.textContent = `${result.totalPages} ${result.totalPages === 1 ? "page" : "pages"}`;
+        }
+
+        if (pageBreakdownTbody) {
+          pageBreakdownTbody.innerHTML = result.pages
+            .map(
+              (p) => `
+            <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors" data-page="${p.pageNumber}">
+              <td class="py-2.5 px-4 font-bold text-neutral-900 dark:text-neutral-100">Page ${p.pageNumber}</td>
+              <td class="py-2.5 px-4">${p.wordCount.toLocaleString()}</td>
+              <td class="py-2.5 px-4">${p.characterCount.toLocaleString()}</td>
+              <td class="py-2.5 px-4">${p.characterCountNoSpaces.toLocaleString()}</td>
+              <td class="py-2.5 px-4 text-right">
+                ${
+                  p.hasText
+                    ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">Digital Text</span>'
+                    : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">No Text / Image</span>'
+                }
+              </td>
+            </tr>
+          `
+            )
+            .join("");
+        }
+      } else {
+        // Multi-file batch processing
+        const batch = await analyzeMultiplePDFs(validFiles, (fileIndex, current, total) => {
+          if (processingTitle) {
+            processingTitle.textContent = `Processing document ${fileIndex + 1} of ${validFiles.length}: page ${current}/${total}`;
+          }
+          if (processingSubtitle) {
+            const overallPct = Math.round(((fileIndex + current / total) / validFiles.length) * 100);
+            processingSubtitle.textContent = `${overallPct}% complete`;
+            if (processingProgressBar) processingProgressBar.style.width = `${Math.max(5, overallPct)}%`;
+          }
+        });
+
+        const combinedPages = batch.files.flatMap((f) =>
+          f.pages.map((p) => ({
+            ...p,
+            pageNumber: p.pageNumber,
+          }))
+        );
+
+        const totalBytes = validFiles.reduce((acc, f) => acc + f.size, 0);
+        const combinedResult: PDFAnalysisResult = {
+          fileName: `${batch.totalFiles} PDF Files (Batch Analysis)`,
+          fileSizeBytes: totalBytes,
+          totalPages: batch.grandTotalPages,
+          totalWords: batch.grandTotalWords,
+          totalCharacters: batch.grandTotalCharacters,
+          totalCharactersNoSpaces: batch.files.reduce((a, b) => a + b.totalCharactersNoSpaces, 0),
+          estimatedReadingTimeMinutes: batch.grandTotalReadingTimeMinutes,
+          estimatedSpeakingTimeMinutes: Math.round((batch.grandTotalWords / 130) * 10) / 10,
+          isScannedOrImageOnly: batch.files.some((f) => f.isScannedOrImageOnly),
+          readability: batch.files[0].readability,
+          pages: combinedPages,
+        };
+
+        currentResult = combinedResult;
+
+        if (processingState) processingState.classList.add("hidden");
+
+        if (fileNameDisplay) fileNameDisplay.textContent = combinedResult.fileName;
+        if (fileSizeDisplay) fileSizeDisplay.textContent = formatBytes(totalBytes);
+
+        animateCount(statWords, combinedResult.totalWords);
+        animateCount(statPages, combinedResult.totalPages);
+        animateCount(statCharsSpaces, combinedResult.totalCharacters);
+        animateCount(statCharsNoSpaces, combinedResult.totalCharactersNoSpaces);
+        if (statReadingTime) statReadingTime.textContent = `${combinedResult.estimatedReadingTimeMinutes} min`;
+        if (statSpeakingTime) statSpeakingTime.textContent = `${combinedResult.estimatedSpeakingTimeMinutes} min`;
+
+        const wordsPerPage = combinedResult.totalPages > 0 ? Math.round(combinedResult.totalWords / combinedResult.totalPages) : 0;
+        animateCount(statWordsPerPage, wordsPerPage);
+
+        if (statReadingEase) animateCount(statReadingEase, combinedResult.readability.readingEase, 650, " / 100");
+        if (statGradeLevel) statGradeLevel.textContent = `Batch Grade: ${combinedResult.readability.gradeLevel}`;
+        if (statReadabilityBadge) statReadabilityBadge.textContent = combinedResult.readability.readingLevelLabel;
+
+        if (breakdownPageCountBadge) {
+          breakdownPageCountBadge.textContent = `${batch.totalFiles} files • ${combinedResult.totalPages} pages`;
+        }
+
+        if (pageBreakdownTbody) {
+          pageBreakdownTbody.innerHTML = batch.files
+            .map(
+              (f, idx) => `
+            <tr class="bg-neutral-100/70 dark:bg-neutral-800/80 font-semibold text-xs border-t border-b border-neutral-200 dark:border-neutral-700">
+              <td colspan="5" class="py-2 px-4 text-neutral-900 dark:text-neutral-100 flex items-center justify-between">
+                <span>File ${idx + 1}: ${f.fileName} (${formatBytes(f.fileSizeBytes)})</span>
+                <span class="text-neutral-500 dark:text-neutral-400 font-mono">${f.totalWords.toLocaleString()} words • ${f.totalPages} pages</span>
+              </td>
+            </tr>
+            ${f.pages
+              .map(
+                (p) => `
+              <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors" data-page="${p.pageNumber}">
+                <td class="py-2.5 px-4 font-bold text-neutral-900 dark:text-neutral-100">Page ${p.pageNumber}</td>
+                <td class="py-2.5 px-4">${p.wordCount.toLocaleString()}</td>
+                <td class="py-2.5 px-4">${p.characterCount.toLocaleString()}</td>
+                <td class="py-2.5 px-4">${p.characterCountNoSpaces.toLocaleString()}</td>
+                <td class="py-2.5 px-4 text-right">
+                  ${
+                    p.hasText
+                      ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">Digital Text</span>'
+                      : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">No Text / Image</span>'
+                  }
+                </td>
+              </tr>
+            `
+              )
+              .join("")}
+          `
+            )
+            .join("");
+        }
+      }
+
+      // Show Stats and Breakdown Containers
+      if (statsContainer) statsContainer.classList.remove("hidden");
+      if (breakdownContainer) breakdownContainer.classList.remove("hidden");
+
+      // Smooth scroll to results
+      statsContainer?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      showToast("Analysis complete!");
+    } catch (err: any) {
+      console.error("PDF Parsing Error:", err);
+      if (err?.name === "PasswordException") {
+        showError("This PDF is password protected. Please unlock the file and try again.");
+      } else {
+        showError(`Failed to process PDF: ${err?.message || "Corrupted or unreadable format"}`);
+      }
+    }
+  }
+
+  // Click dropzone to browse
+  dropzone?.addEventListener("click", () => {
+    fileInput?.click();
+  });
+
+  dropzone?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      fileInput?.click();
+    }
+  });
+
+  // Input file change
+  fileInput?.addEventListener("change", (e) => {
+    const target = e.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      handleFiles(target.files);
+    }
+  });
+
+  // Drag and Drop Events
+  ["dragenter", "dragover"].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add("border-neutral-900", "dark:border-white", "bg-neutral-100/80", "dark:bg-neutral-800/80");
+    });
+  });
+
+  ["dragleave", "drop"].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove("border-neutral-900", "dark:border-white", "bg-neutral-100/80", "dark:bg-neutral-800/80");
+    });
+  });
+
+  dropzone?.addEventListener("drop", (e) => {
+    const dt = e.dataTransfer;
+    if (dt && dt.files && dt.files.length > 0) {
+      handleFiles(dt.files);
+    }
+  });
+
+  // Error dismiss button
+  errorDismissBtn?.addEventListener("click", () => {
+    hideError();
+  });
+
+  // Reset Button (Analyze Another PDF)
+  resetBtn?.addEventListener("click", () => {
+    currentResult = null;
+    if (fileInput) fileInput.value = "";
+    if (statsContainer) statsContainer.classList.add("hidden");
+    if (breakdownContainer) breakdownContainer.classList.add("hidden");
+    if (dropzone) dropzone.classList.remove("hidden");
+    hideError();
+  });
+
+  // Copy Summary Button
+  copySummaryBtn?.addEventListener("click", async () => {
+    if (!currentResult) return;
+
+    const summary = [
+      `PDF Document Analysis: ${currentResult.fileName}`,
+      `----------------------------------------`,
+      `• Total Words: ${currentResult.totalWords.toLocaleString()}`,
+      `• Total Pages: ${currentResult.totalPages.toLocaleString()}`,
+      `• Characters (with spaces): ${currentResult.totalCharacters.toLocaleString()}`,
+      `• Characters (no spaces): ${currentResult.totalCharactersNoSpaces.toLocaleString()}`,
+      `• Est. Reading Time: ${currentResult.estimatedReadingTimeMinutes} min (at 225 wpm)`,
+      `• Est. Speaking Time: ${currentResult.estimatedSpeakingTimeMinutes} min (at 130 wpm)`,
+      `• Readability: ${currentResult.readability?.readingEase ?? 'N/A'}/100 (${currentResult.readability?.readingLevelLabel ?? 'N/A'}, Grade ${currentResult.readability?.gradeLevel ?? 'N/A'})`,
+      `• Document Type: ${currentResult.isScannedOrImageOnly ? "Scanned/Image Document (OCR Recommended)" : "Digital Text Document"}`,
+      `----------------------------------------`,
+      `100% Client-Side Privacy: Verified zero server uploads.`,
+      `https://pdfwordcounter.org`,
+    ].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      showToast("Summary copied to clipboard!");
+      if (copyIcon && copiedIcon && copyBtnText) {
+        copyIcon.classList.add("hidden");
+        copiedIcon.classList.remove("hidden");
+        copyBtnText.textContent = "Copied!";
+        setTimeout(() => {
+          copyIcon.classList.remove("hidden");
+          copiedIcon.classList.add("hidden");
+          copyBtnText.textContent = "Copy Summary";
+        }, 2000);
+      }
+    } catch (e) {
+      console.error("Clipboard copy error:", e);
+    }
+  });
+
+  // Export CSV Button
+  exportCsvBtn?.addEventListener("click", () => {
+    if (!currentResult) return;
+
+    const csvContent = exportToCSV(currentResult);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const cleanFileName = currentResult.fileName.replace(/\.pdf$/i, "").replace(/[^a-zA-Z0-9-_]/g, "_");
+    a.href = url;
+    a.download = `${cleanFileName}-word-count-report.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast("CSV report downloaded!");
+  });
+
+  // Page Search / Filter
+  pageSearchInput?.addEventListener("input", (e) => {
+    const query = (e.target as HTMLInputElement).value.trim().toLowerCase();
+    const rows = pageBreakdownTbody?.querySelectorAll("tr");
+    if (!rows) return;
+
+    rows.forEach((row) => {
+      const pageNum = row.getAttribute("data-page");
+      if (!query || (pageNum && pageNum.includes(query))) {
+        row.classList.remove("hidden");
+      } else {
+        row.classList.add("hidden");
+      }
+    });
+  });
+</script>

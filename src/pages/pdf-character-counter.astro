@@ -1,0 +1,217 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PDFTool from "../components/PDFTool.astro";
+
+const pageTitle = "PDF Character Counter — Free Character Count (With & Without Spaces)";
+const pageDescription = "Accurately count characters with spaces and without spaces in any PDF file. 100% in-browser, private, and free. Essential for translators, grant writers, and academic submissions.";
+const canonicalUrl = "https://pdfwordcounter.org/pdf-character-counter";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords="pdf character counter, count characters in pdf, characters with spaces pdf, characters without spaces pdf, pdf letter count, translation character count, academic abstract character limit"
+  canonicalUrl={canonicalUrl}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-8 sm:pt-16 sm:pb-12 overflow-hidden">
+    <div class="absolute inset-0 -z-10 flex items-center justify-center opacity-40 dark:opacity-20 pointer-events-none">
+      <div class="w-[32rem] h-[32rem] rounded-full bg-gradient-to-tr from-blue-500/20 via-indigo-500/20 to-transparent blur-3xl"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+        Zero Uploads • High-Precision Character Counting
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-[1.15]">
+        Accurate <span class="bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">PDF Character Counter</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+        Count characters with spaces and without spaces instantly. Perfect for academic abstracts, grant proposals, and professional translation billing.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Tool Section -->
+  <section id="tool" class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+    <div class="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 shadow-xl shadow-neutral-900/5 dark:shadow-black/40 overflow-hidden backdrop-blur-xl">
+      <!-- Tool Header Bar -->
+      <div class="px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between bg-neutral-50/50 dark:bg-neutral-900/40">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
+          <div class="w-3 h-3 rounded-full bg-amber-400/80"></div>
+          <div class="w-3 h-3 rounded-full bg-emerald-400/80"></div>
+          <span class="ml-2 text-xs font-mono text-neutral-500 dark:text-neutral-400">browser-memory-sandbox://character-inspector</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Offline Ready</span>
+        </div>
+      </div>
+
+      <!-- Core Interactive Zone -->
+      <div class="p-6 sm:p-10 space-y-6">
+        <PDFTool highlightMetric="characters" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Tool Quick Switcher -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+    <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Need other document metrics?</h3>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">Switch to dedicated counters tailored for different document workflows:</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="/" class="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 dark:hover:border-white transition-all">Word Counter</a>
+        <a href="/pdf-page-counter" class="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 dark:hover:border-white transition-all">Page Counter</a>
+        <a href="/pdf-reading-time" class="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 dark:hover:border-white transition-all">Reading Time</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Guide: The Mechanics of Character Counting in PDF Documents -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12 border-t border-neutral-200 dark:border-neutral-800 space-y-12">
+    <header class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
+        <span>Editorial Guide</span>
+        <span>•</span>
+        <span>6 min read</span>
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Characters With vs. Without Spaces: Industry Standards & PDF Extraction
+      </h2>
+      <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Learn how translation billing, grant applications, and character limits are computed from complex PDF text streams.
+      </p>
+    </header>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none space-y-8 text-neutral-700 dark:text-neutral-300 leading-relaxed text-sm sm:text-base">
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          Why Character Counts Matter in Translation & Publishing
+        </h3>
+        <p>
+          While English and Romance language markets frequently bill by the word, many European and Asian markets (including German, French, Italian, Japanese, and Chinese) rely heavily on <strong>standard page units</strong> or <strong>character counts</strong>.
+        </p>
+        <p>
+          In Germany and Central Europe, legal and literary translation frequently utilizes the <em>Normseite</em> standard: 1,800 characters including spaces (approximately 30 lines of 60 keystrokes). In technical document translation, billing per 1,000 characters without spaces is the benchmark to ensure fair compensation across languages with agglutinative or compound word structures.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          How PDF Text Streams Handle Spaces and Ligatures
+        </h3>
+        <p>
+          Counting characters in a PDF is fundamentally different from counting characters in a Microsoft Word (<code class="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono text-xs">.docx</code>) or markdown document.
+        </p>
+        <p>
+          In PDF documents, spaces frequently do not exist as explicit ASCII space characters (code 32). Instead, desktop publishing software (like Adobe InDesign or LaTeX) renders words using <em>relative displacement operators</em> (such as the <code class="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono text-xs">TJ</code> operator), moving the virtual print cursor horizontally across the X-axis:
+        </p>
+        <pre class="p-4 rounded-xl bg-neutral-100 dark:bg-neutral-900 text-xs font-mono overflow-x-auto text-neutral-800 dark:text-neutral-200"><code>[(Hello) -250 (World)] TJ  % Word separation achieved by cursor shift, not ASCII space</code></pre>
+        <p>
+          Our client-side parsing engine intelligently normalizes these relative typographic displacement gaps. It reconstructs genuine semantic spaces without inflating counts through phantom spacing, delivering an exact character tally for both <strong>With Spaces</strong> and <strong>No Spaces</strong> metrics.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          Common Submission Character Limits
+        </h3>
+        <p>
+          Submitting papers, abstracts, or applications with strict character ceilings? Here are common international constraints:
+        </p>
+        <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+          <table class="min-w-full text-xs sm:text-sm text-left divide-y divide-neutral-200 dark:divide-neutral-800">
+            <thead class="bg-neutral-50 dark:bg-neutral-900/50">
+              <tr>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Platform / Organization</th>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Document Type</th>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Standard Limit</th>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Space Policy</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+              <tr>
+                <td class="py-2.5 px-4 font-medium">PubMed / MEDLINE</td>
+                <td class="py-2.5 px-4">Journal Abstract</td>
+                <td class="py-2.5 px-4 font-mono">2,500 characters</td>
+                <td class="py-2.5 px-4">Includes spaces</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium">National Science Foundation (NSF)</td>
+                <td class="py-2.5 px-4">Project Summary Overview</td>
+                <td class="py-2.5 px-4 font-mono">4,600 characters</td>
+                <td class="py-2.5 px-4">Includes spaces</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium">European Patent Office (EPO)</td>
+                <td class="py-2.5 px-4">Patent Abstract</td>
+                <td class="py-2.5 px-4 font-mono">1,000 characters</td>
+                <td class="py-2.5 px-4">Without spaces</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium">UCAS University Application</td>
+                <td class="py-2.5 px-4">Personal Statement</td>
+                <td class="py-2.5 px-4 font-mono">4,000 characters</td>
+                <td class="py-2.5 px-4">Includes spaces</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <!-- Sub-page FAQs -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 border-t border-neutral-200 dark:border-neutral-800 space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+        Frequently Asked Questions: PDF Character Counting
+      </h2>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        Answers to common questions regarding character counts, punctuation, and translation metrics.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <details class="group p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40">
+        <summary class="flex items-center justify-between cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <span>Are punctuation marks counted as characters?</span>
+          <span class="transition-transform group-open:rotate-180">↓</span>
+        </summary>
+        <p class="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Yes. Punctuation marks (periods, commas, semicolons, hyphens, quotes) represent valid glyph keystrokes and are counted in both "Characters with spaces" and "Characters without spaces".
+        </p>
+      </details>
+
+      <details class="group p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40">
+        <summary class="flex items-center justify-between cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <span>How are line breaks and tabs counted?</span>
+          <span class="transition-transform group-open:rotate-180">↓</span>
+        </summary>
+        <p class="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          In our character counter, whitespace sequences (multiple consecutive spaces, tabs, and paragraph breaks) are normalized to single space intervals to reflect true readable character volume without artificial padding.
+        </p>
+      </details>
+
+      <details class="group p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40">
+        <summary class="flex items-center justify-between cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <span>Can I export per-page character statistics?</span>
+          <span class="transition-transform group-open:rotate-180">↓</span>
+        </summary>
+        <p class="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Yes. Click the "Export CSV" button after inspecting your file to download a spreadsheet containing granular per-page breakdowns of characters with spaces, characters without spaces, and word counts.
+        </p>
+      </details>
+    </div>
+  </section>
+</Layout>

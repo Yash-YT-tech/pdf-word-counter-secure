@@ -1,0 +1,215 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PDFTool from "../components/PDFTool.astro";
+
+const pageTitle = "PDF Reading Time Calculator — Estimate Speech & Reading Duration";
+const pageDescription = "Calculate estimated reading time and speaking duration for any PDF document. 100% private, client-side, and free. Essential for keynote speakers, students, and podcast narrators.";
+const canonicalUrl = "https://pdfwordcounter.org/pdf-reading-time";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords="pdf reading time, pdf reading time calculator, estimate pdf speech time, pdf speaking time, speech duration calculator, presentation timer pdf, words to minutes pdf"
+  canonicalUrl={canonicalUrl}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-8 sm:pt-16 sm:pb-12 overflow-hidden">
+    <div class="absolute inset-0 -z-10 flex items-center justify-center opacity-40 dark:opacity-20 pointer-events-none">
+      <div class="w-[32rem] h-[32rem] rounded-full bg-gradient-to-tr from-purple-500/20 via-pink-500/20 to-transparent blur-3xl"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
+        <span class="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+        Zero Uploads • Silent & Spoken Duration Estimates
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-[1.15]">
+        PDF <span class="bg-gradient-to-r from-purple-600 to-pink-500 dark:from-purple-400 dark:to-pink-300 bg-clip-text text-transparent">Reading Time Calculator</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+        Instantly estimate silent reading time and spoken presentation duration for any PDF script, slide deck, or document.
+      </p>
+    </div>
+  </section>
+
+  <!-- Interactive Tool Section -->
+  <section id="tool" class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+    <div class="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 shadow-xl shadow-neutral-900/5 dark:shadow-black/40 overflow-hidden backdrop-blur-xl">
+      <!-- Tool Header Bar -->
+      <div class="px-6 py-4 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between bg-neutral-50/50 dark:bg-neutral-900/40">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-red-400/80"></div>
+          <div class="w-3 h-3 rounded-full bg-amber-400/80"></div>
+          <div class="w-3 h-3 rounded-full bg-emerald-400/80"></div>
+          <span class="ml-2 text-xs font-mono text-neutral-500 dark:text-neutral-400">browser-memory-sandbox://duration-inspector</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          <span>Offline Ready</span>
+        </div>
+      </div>
+
+      <!-- Core Interactive Zone -->
+      <div class="p-6 sm:p-10 space-y-6">
+        <PDFTool highlightMetric="reading-time" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Tool Quick Switcher -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
+    <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/60 dark:bg-neutral-900/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Need other document metrics?</h3>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">Switch to dedicated counters tailored for different document workflows:</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="/" class="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 dark:hover:border-white transition-all">Word Counter</a>
+        <a href="/pdf-page-counter" class="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 dark:hover:border-white transition-all">Page Counter</a>
+        <a href="/pdf-character-counter" class="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-200 hover:border-neutral-900 dark:hover:border-white transition-all">Character Counter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Guide: The Science of Reading & Speaking Duration -->
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12 border-t border-neutral-200 dark:border-neutral-800 space-y-12">
+    <header class="space-y-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400">
+        <span>Speaker's Guide</span>
+        <span>•</span>
+        <span>8 min read</span>
+      </div>
+      <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100">
+        How Reading and Speaking Times Are Calculated: Cadence & Pacing Benchmarks
+      </h2>
+      <p class="text-base sm:text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        Understand the cognitive science behind silent reading speeds, presentation pacing, and how to calibrate your keynote speeches.
+      </p>
+    </header>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none space-y-8 text-neutral-700 dark:text-neutral-300 leading-relaxed text-sm sm:text-base">
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          Silent Reading vs. Spoken Delivery
+        </h3>
+        <p>
+          There is a massive cognitive difference between <em>reading silently to oneself</em> and <em>delivering speech out loud to an audience</em>:
+        </p>
+        <ul class="list-disc pl-6 space-y-2">
+          <li><strong>Silent Reading (Average 225 WPM):</strong> Adult native readers typically process non-technical text at 200 to 250 words per minute. Eye fixations and saccades allow the brain to absorb multiple words per fixation glance without phonetic articulation.</li>
+          <li><strong>Spoken Delivery (Average 130 WPM):</strong> Speaking aloud requires physical articulation of phonemes, deliberate breathing pauses, and rhythm for audience retention. A comfortable keynote delivery speed is 120 to 140 words per minute. Attempting to deliver speech at 180+ WPM degrades comprehension significantly.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          Speaking Pace Benchmarks by Context
+        </h3>
+        <div class="overflow-x-auto rounded-xl border border-neutral-200 dark:border-neutral-800">
+          <table class="min-w-full text-xs sm:text-sm text-left divide-y divide-neutral-200 dark:divide-neutral-800">
+            <thead class="bg-neutral-50 dark:bg-neutral-900/50">
+              <tr>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Speech Context</th>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Words Per Minute (WPM)</th>
+                <th class="py-3 px-4 font-semibold text-neutral-900 dark:text-neutral-100">Recommended For</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800">
+              <tr>
+                <td class="py-2.5 px-4 font-medium">Deliberate Keynote / TED-style Talk</td>
+                <td class="py-2.5 px-4 font-mono">110–130 WPM</td>
+                <td class="py-2.5 px-4">Inspiring speeches with strategic dramatic pauses</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium">Standard Business Presentation</td>
+                <td class="py-2.5 px-4 font-mono">130–150 WPM</td>
+                <td class="py-2.5 px-4">Corporate updates, board meetings, team reviews</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium">Audiobook / Narration Pace</td>
+                <td class="py-2.5 px-4 font-mono">150–160 WPM</td>
+                <td class="py-2.5 px-4">Engaging audiobook narration with clear diction</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-4 font-medium">Podcast / Conversational Chat</td>
+                <td class="py-2.5 px-4 font-mono">150–175 WPM</td>
+                <td class="py-2.5 px-4">Casual two-way dialogues and dynamic discussions</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          Slide Deck Preparation: The 1-Minute Rule
+        </h3>
+        <p>
+          When preparing presentation slide decks exported as PDF files, a golden guideline for conferences is the <strong>1-Minute Per Slide Rule</strong>. If your conference speaking slot is 20 minutes, your deck should typically contain between 15 and 20 content slides.
+        </p>
+        <p>
+          Our tool calculates both the total document word count and the average words per page. If your PDF slides contain more than 100 words per page on average, your audience will spend their cognitive focus reading text off the screen rather than engaging with your spoken voice.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h3 class="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+          How Text Complexity Affects Speed
+        </h3>
+        <p>
+          Our engine integrates real-time calculation of the <strong>Flesch Reading Ease score</strong> and <strong>Flesch-Kincaid Grade Level</strong>. Complex legal contracts or medical research papers with low readability scores (under 40) require audience re-reading and slower vocal delivery, reducing effective speaking rates by 15–25%.
+        </p>
+      </section>
+    </div>
+  </article>
+
+  <!-- Sub-page FAQs -->
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-12 border-t border-neutral-200 dark:border-neutral-800 space-y-8">
+    <div class="text-center space-y-2">
+      <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+        Frequently Asked Questions: PDF Reading & Speaking Time
+      </h2>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400">
+        Helpful guidance on calibrating speech timings and presentation lengths.
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      <details class="group p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40">
+        <summary class="flex items-center justify-between cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <span>What formula is used to calculate reading time?</span>
+          <span class="transition-transform group-open:rotate-180">↓</span>
+        </summary>
+        <p class="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Reading time is calculated as <code class="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono text-xs">Total Words ÷ 225</code>. This represents the established scientific average for silent adult reading speed in English and Western languages.
+        </p>
+      </details>
+
+      <details class="group p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40">
+        <summary class="flex items-center justify-between cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <span>What formula is used to calculate speaking duration?</span>
+          <span class="transition-transform group-open:rotate-180">↓</span>
+        </summary>
+        <p class="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Speaking duration is calculated as <code class="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 font-mono text-xs">Total Words ÷ 130</code>. This represents standard presentation pacing that allows for natural cadence, clarity of pronunciation, and breathing intervals.
+        </p>
+      </details>
+
+      <details class="group p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40">
+        <summary class="flex items-center justify-between cursor-pointer font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base">
+          <span>Can I practice a speech using the page-by-page table?</span>
+          <span class="transition-transform group-open:rotate-180">↓</span>
+        </summary>
+        <p class="mt-3 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Absolutely. The per-page breakdown table shows word counts for each slide or script sheet, allowing you to estimate how many seconds you should allocate to each individual slide during practice.
+        </p>
+      </details>
+    </div>
+  </section>
+</Layout>

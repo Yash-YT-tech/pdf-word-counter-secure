@@ -61,7 +61,13 @@ chore: update pdfjs-dist to latest version
 
 ## Commit History
 
-### Phase 5: Deploy & Domain Setup
+### Phase 5: Website Perfection, Sub-Pages, Motion & Deep QA
+
+| # | Hash | Message | Date |
+|---|---|---|---|
+| 11 | `PENDING` | `feat: complete website perfection pass, programmatic sub-pages, motion polish, and end-to-end QA` | 2026-09-15 |
+
+### Phase 5 (Prep): Cloudflare Wrangler & Deploy Script
 
 | # | Hash | Message | Date |
 |---|---|---|---|

@@ -163,5 +163,54 @@
         Based on standard 130 wpm speech rate
       </p>
     </div>
+
+    <!-- Card 7: Words Per Page Density -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Average Words / Page
+      </span>
+      <div id="stat-words-per-page" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Mean textual density per sheet
+      </p>
+    </div>
+
+    <!-- Card 8: Readability Grade Level -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors col-span-2 lg:col-span-2">
+      <div class="flex items-center justify-between">
+        <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+          Reading Ease & Complexity
+        </span>
+        <span id="stat-readability-badge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+          Standard
+        </span>
+      </div>
+      <div class="mt-2 flex items-baseline gap-3">
+        <div id="stat-reading-ease" class="text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+          0 / 100
+        </div>
+        <div id="stat-grade-level" class="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+          Grade Level: 0
+        </div>
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Flesch-Kincaid index calculated from sentence length and syllable metrics
+      </p>
+    </div>
+  </div>
+
+  <!-- Floating Toast Notification Feedback -->
+  <div
+    id="toast-notification"
+    class="fixed bottom-6 right-6 z-50 transform translate-y-8 opacity-0 pointer-events-none transition-all duration-200 ease-out flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-neutral-950 text-white dark:bg-white dark:text-neutral-950 shadow-2xl border border-neutral-800 dark:border-neutral-200 text-xs font-medium backdrop-blur-md"
+    role="status"
+    aria-live="polite"
+  >
+    <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toast-message">Copied to clipboard</span>
   </div>
 </div>
