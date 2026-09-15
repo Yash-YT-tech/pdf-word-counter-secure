@@ -1,0 +1,1 @@
+# pdf-word-counter-secure
