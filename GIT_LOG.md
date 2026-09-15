@@ -65,7 +65,7 @@ chore: update pdfjs-dist to latest version
 
 | # | Hash | Message | Date |
 |---|---|---|---|
-| 5 | `pending` | `feat: implement layout system, header, footer, dark mode, 404, legal pages, robots.txt, and sitemap` | 2026-09-15 |
+| 5 | `9b07b6a` | `feat: implement layout system, header, footer, dark mode, 404, legal pages, robots.txt, and sitemap` | 2026-09-15 |
 
 ### Phase 0: Scaffold & Foundation
 
