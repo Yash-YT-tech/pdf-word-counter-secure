@@ -1,0 +1,164 @@
+---
+---
+
+<div id="stats-container" class="hidden space-y-6 w-full animate-fadeIn">
+  <!-- Active File Information Bar -->
+  <div class="p-4 sm:p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white/70 dark:bg-neutral-900/60 backdrop-blur-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex items-center gap-3.5 min-w-0">
+      <div class="w-10 h-10 rounded-xl bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 flex items-center justify-center flex-shrink-0 shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+        </svg>
+      </div>
+      <div class="min-w-0">
+        <h2 id="file-name-display" class="text-sm sm:text-base font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+          document.pdf
+        </h2>
+        <div class="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+          <span id="file-size-display">0 KB</span>
+          <span>•</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-medium">Memory Sandbox</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center gap-2 sm:self-center">
+      <button
+        id="copy-summary-btn"
+        type="button"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-xs font-medium transition-all active:scale-95 shadow-sm"
+      >
+        <svg id="copy-icon" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+          <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+        </svg>
+        <svg id="copied-icon" class="w-3.5 h-3.5 text-emerald-500 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="copy-btn-text">Copy Summary</span>
+      </button>
+
+      <button
+        id="export-csv-btn"
+        type="button"
+        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-xs font-medium transition-all active:scale-95 shadow-sm"
+      >
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" x2="12" y1="15" y2="3"></line>
+        </svg>
+        <span>Export CSV</span>
+      </button>
+
+      <button
+        id="reset-btn"
+        type="button"
+        class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-100 dark:text-neutral-900 text-xs font-medium transition-all active:scale-95 shadow-sm"
+      >
+        <span>New File</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scanned Document Alert Banner (Hidden by default) -->
+  <div
+    id="scanned-pdf-warning"
+    class="hidden p-4 sm:p-5 rounded-2xl border border-amber-300 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/30 text-amber-900 dark:text-amber-200 text-xs sm:text-sm space-y-1.5"
+  >
+    <div class="flex items-center gap-2 font-semibold text-amber-800 dark:text-amber-300">
+      <svg class="w-4 h-4 flex-shrink-0 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+      </svg>
+      <span>Image-Only or Scanned PDF Detected</span>
+    </div>
+    <p class="leading-relaxed text-amber-700 dark:text-amber-300/90 pl-6 text-xs">
+      This document contains pages with little or no extractable digital text layer. It appears to be a scanned document or photograph. To count words in scanned documents, run Optical Character Recognition (OCR) first.
+    </p>
+  </div>
+
+  <!-- 6-Card Metric Grid -->
+  <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+    <!-- Card 1: Total Words (Primary) -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Total Words
+      </span>
+      <div id="stat-words" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Extracted words across all pages
+      </p>
+    </div>
+
+    <!-- Card 2: Total Pages -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Total Pages
+      </span>
+      <div id="stat-pages" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Number of document sheets
+      </p>
+    </div>
+
+    <!-- Card 3: Characters (With Spaces) -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Characters (with spaces)
+      </span>
+      <div id="stat-chars-spaces" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Full character volume
+      </p>
+    </div>
+
+    <!-- Card 4: Characters (No Spaces) -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Characters (no spaces)
+      </span>
+      <div id="stat-chars-nospaces" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Net character count for translation
+      </p>
+    </div>
+
+    <!-- Card 5: Estimated Reading Time -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Estimated Reading Time
+      </span>
+      <div id="stat-reading-time" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0 min
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Based on standard 225 wpm reading speed
+      </p>
+    </div>
+
+    <!-- Card 6: Estimated Speaking Time -->
+    <div class="p-5 sm:p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 shadow-sm hover:border-neutral-300 dark:hover:border-neutral-700 transition-colors">
+      <span class="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+        Estimated Speaking Time
+      </span>
+      <div id="stat-speaking-time" class="mt-2 text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100 font-mono">
+        0 min
+      </div>
+      <p class="mt-1 text-[11px] text-neutral-500 dark:text-neutral-400">
+        Based on standard 130 wpm speech rate
+      </p>
+    </div>
+  </div>
+</div>

@@ -61,6 +61,12 @@ chore: update pdfjs-dist to latest version
 
 ## Commit History
 
+### Phase 2: Core PDF Tool Engine
+
+| # | Hash | Message | Date |
+|---|---|---|---|
+| 7 | `pending` | `feat: implement core PDF processing engine, interactive dropzone, metric stats, and page breakdown` | 2026-09-15 |
+
 ### Phase 1: Layout System & Design Foundation
 
 | # | Hash | Message | Date |

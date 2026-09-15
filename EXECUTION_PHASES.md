@@ -13,7 +13,7 @@ Scaffold     Layout &    Core PDF    SEO &       Deploy &    Analytics   AdSense
 & Skills     Design      Tool        Content     Domain      & Search    Monetize
              System      Engine                  Setup       Console
                                                                      
-[DONE ✅]   [DONE ✅]   [NEXT ▶]   [PENDING]   [PENDING]   [PENDING]   [PENDING]
+[DONE ✅]   [DONE ✅]   [DONE ✅]   [NEXT ▶]   [PENDING]   [PENDING]   [PENDING]
 ```
 
 ---
@@ -76,49 +76,44 @@ Scaffold     Layout &    Core PDF    SEO &       Deploy &    Analytics   AdSense
 
 ---
 
-## Phase 2: Core PDF Tool Engine 🔲 NEXT
+## Phase 2: Core PDF Tool Engine ✅ COMPLETE
 
-**Duration:** ~3–4 hours  
-**Prerequisite:** Phase 1 complete
+**Duration:** ~2 hours  
+**Status:** ✅ Done (2026-09-15)
 
-### Tasks:
-- [ ] Create `src/scripts/pdf-processor.ts`
-  - Initialize pdfjs-dist with Web Worker
-  - `processPDF(file: File)` → returns structured results object
+### Completed Tasks:
+- [x] Create `src/scripts/pdf-processor.ts`
+  - Initialize pdfjs-dist with self-hosted Web Worker (`/pdf.worker.min.mjs`)
+  - `analyzePDF(file: File, onProgress)` → in-memory arrayBuffer processing
   - Per-page text extraction via `page.getTextContent()`
-  - Word counting (split by whitespace, filter empty strings)
-  - Character counting (with spaces / without spaces)
-  - Reading time calculation (total words / 225)
-  - Speaking time calculation (total words / 130)
-  - Scanned PDF detection (pages with 0 extractable text)
-  - Error handling for corrupt/encrypted PDFs
-- [ ] Create `src/components/DropZone.astro`
-  - Drag-and-drop visual area with dashed border
-  - File input fallback button
-  - Accept only `.pdf` files
-  - Loading spinner/progress during processing
-  - File name and size display after selection
-- [ ] Create `src/components/StatsDisplay.astro`
-  - 4-column stat card grid (Words, Pages, Characters, Reading Time)
-  - Animated number counting effect
-  - Speaking time as secondary stat
-  - Scanned PDF warning banner (if detected)
-- [ ] Create `src/components/PageBreakdown.astro`
-  - Expandable/collapsible table
-  - Columns: Page #, Words, Characters
-  - Zebra striping, responsive scroll on mobile
-- [ ] Create `src/scripts/clipboard.ts`
-  - Copy formatted summary to clipboard
-  - Show success toast/notification
-- [ ] Add CSV export functionality
-  - Generate CSV blob from page breakdown data
-  - Trigger browser download
-- [ ] Wire everything together on `src/pages/index.astro`
-- [ ] **Git commit:** `feat: implement core PDF processing engine and tool UI`
+  - Accurate word counting (normalized whitespace splitting)
+  - Character metrics (with spaces & without spaces)
+  - Estimated reading time (at 225 wpm) & speaking time (at 130 wpm)
+  - Diagnostic scanner to detect image-only / scanned PDFs lacking text layer
+  - Password & format error exception handling
+- [x] Create `src/components/DropZone.astro`
+  - Drag-and-drop visual drop zone with hover/drag state animations
+  - File browser fallback input
+  - Dynamic animated progress bar ("Analyzing page X of Y...")
+  - Error state alert banner with "Try Again" dismiss action
+- [x] Create `src/components/StatsDisplay.astro`
+  - 6-card metric grid: Words, Pages, Characters (spaces), Characters (no spaces), Reading Time, Speaking Time
+  - Document header banner with file name, file size, and memory sandbox badge
+  - Scanned PDF warning alert banner
+  - 1-click "Copy Summary" button with clipboard API and copied state feedback
+  - "Export CSV Report" button with browser file download
+  - "New File" reset action
+- [x] Create `src/components/PageBreakdown.astro`
+  - Expandable/collapsible table with granular per-page metrics
+  - Sticky glassmorphism table header and zebra striping
+  - Instant page number filter search input
+- [x] Wire full tool into `src/pages/index.astro`
+- [x] Copy self-hosted `pdf.worker.min.mjs` (1.3MB) into `public/` for zero-CDN offline reliability
+- [x] Verified production build: 6 pages built cleanly in under 1 second
 
 ---
 
-## Phase 3: SEO Content & Legal Pages 🔲
+## Phase 3: SEO Content & Legal Pages 🔲 NEXT
 
 **Duration:** ~2–3 hours  
 **Prerequisite:** Phase 2 complete

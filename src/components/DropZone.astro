@@ -1,0 +1,99 @@
+---
+---
+
+<div id="pdf-dropzone-container" class="w-full">
+  <!-- Default Dropzone Box -->
+  <div
+    id="dropzone"
+    class="relative border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-neutral-800 dark:hover:border-neutral-200 bg-neutral-50/50 dark:bg-neutral-900/30 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/30 rounded-2xl p-8 sm:p-14 text-center transition-all cursor-pointer group"
+  >
+    <input
+      type="file"
+      id="pdf-file-input"
+      accept="application/pdf,.pdf"
+      class="sr-only"
+    />
+
+    <div class="flex flex-col items-center justify-center gap-4">
+      <!-- Icon with hover bounce -->
+      <div class="w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700/80 text-neutral-700 dark:text-neutral-300 flex items-center justify-center transition-all duration-200 group-hover:scale-110 group-hover:border-neutral-900 dark:group-hover:border-neutral-100 shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+          <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+          <path d="M12 12v6"></path>
+          <path d="m15 15-3-3-3 3"></path>
+        </svg>
+      </div>
+
+      <div class="space-y-1.5 max-w-sm">
+        <p class="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+          Drop your PDF here, or <span class="text-blue-600 dark:text-blue-400 underline underline-offset-2">browse</span>
+        </p>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400">
+          Fast, client-side analysis • No file size limit • 100% Private
+        </p>
+      </div>
+
+      <div class="flex items-center gap-3 pt-2">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          Zero Server Uploads
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Processing State (Hidden by default) -->
+  <div
+    id="processing-state"
+    class="hidden border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 rounded-2xl p-8 sm:p-12 text-center space-y-5 backdrop-blur-sm"
+  >
+    <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 animate-spin">
+      <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+
+    <div class="space-y-2">
+      <h3 id="processing-title" class="text-base font-semibold text-neutral-900 dark:text-neutral-100">
+        Parsing PDF in browser memory...
+      </h3>
+      <p id="processing-subtitle" class="text-xs font-mono text-neutral-500 dark:text-neutral-400">
+        Extracting text layer...
+      </p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="max-w-md mx-auto w-full bg-neutral-200 dark:bg-neutral-800 rounded-full h-2 overflow-hidden">
+      <div
+        id="processing-progress-bar"
+        class="bg-neutral-900 dark:bg-white h-2 rounded-full transition-all duration-150 w-0"
+      ></div>
+    </div>
+  </div>
+
+  <!-- Error State (Hidden by default) -->
+  <div
+    id="error-state"
+    class="hidden mt-4 p-4 rounded-xl border border-red-200 dark:border-red-950/60 bg-red-50/50 dark:bg-red-950/20 text-red-700 dark:text-red-400 text-xs flex items-center justify-between gap-3"
+  >
+    <div class="flex items-center gap-2">
+      <svg class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+        <line x1="12" y1="8" x2="12" y2="12" stroke-width="2"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16" stroke-width="2"></line>
+      </svg>
+      <span id="error-message">Failed to parse PDF document.</span>
+    </div>
+    <button
+      id="error-dismiss-btn"
+      type="button"
+      class="text-xs font-semibold hover:underline"
+    >
+      Try Again
+    </button>
+  </div>
+</div>

@@ -1,5 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import DropZone from "../components/DropZone.astro";
+import StatsDisplay from "../components/StatsDisplay.astro";
+import PageBreakdown from "../components/PageBreakdown.astro";
 ---
 
 <Layout
@@ -32,7 +35,7 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 
-  <!-- Interactive Tool Container (Scaffolded for Phase 2 Core Engine) -->
+  <!-- Interactive Tool Section -->
   <section id="tool" class="max-w-4xl mx-auto px-4 sm:px-6 pb-16">
     <div class="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 shadow-xl shadow-neutral-900/5 dark:shadow-black/40 overflow-hidden backdrop-blur-xl">
       <!-- Tool Header Bar -->
@@ -52,45 +55,11 @@ import Layout from "../layouts/Layout.astro";
         </div>
       </div>
 
-      <!-- Dropzone Area -->
-      <div class="p-8 sm:p-12 text-center">
-        <div class="max-w-xl mx-auto border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-neutral-900 dark:hover:border-neutral-300 rounded-2xl p-8 sm:p-12 transition-all cursor-pointer group bg-neutral-50/30 dark:bg-neutral-950/20">
-          <div class="flex flex-col items-center gap-4">
-            <div class="w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="17 8 12 3 7 8"></polyline>
-                <line x1="12" x2="12" y1="3" y2="15"></line>
-              </svg>
-            </div>
-            
-            <div class="space-y-1">
-              <p class="text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                Drag and drop your PDF file here
-              </p>
-              <p class="text-xs text-neutral-500 dark:text-neutral-400">
-                Supports all standard PDF documents • Processed 100% locally
-              </p>
-            </div>
-
-            <div class="pt-2">
-              <button
-                type="button"
-                class="px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-100 dark:text-neutral-900 text-sm font-semibold transition-all shadow-sm active:scale-95"
-              >
-                Browse PDF Files
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Privacy Assurance Banner -->
-        <div class="mt-6 flex items-center justify-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
-          <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-          <span>Your PDF is parsed locally using Mozilla's pdf.js engine. No file bytes ever reach our servers.</span>
-        </div>
+      <!-- Core Interactive Zone -->
+      <div class="p-6 sm:p-10 space-y-6">
+        <DropZone />
+        <StatsDisplay />
+        <PageBreakdown />
       </div>
     </div>
   </section>
@@ -209,3 +178,274 @@ import Layout from "../layouts/Layout.astro";
     </div>
   </section>
 </Layout>
+
+<script>
+  import { analyzePDF, formatBytes, exportToCSV, type PDFAnalysisResult } from "../scripts/pdf-processor";
+
+  let currentResult: PDFAnalysisResult | null = null;
+
+  // DOM Elements
+  const dropzone = document.getElementById("dropzone");
+  const fileInput = document.getElementById("pdf-file-input") as HTMLInputElement | null;
+  const processingState = document.getElementById("processing-state");
+  const processingTitle = document.getElementById("processing-title");
+  const processingSubtitle = document.getElementById("processing-subtitle");
+  const processingProgressBar = document.getElementById("processing-progress-bar");
+  const errorState = document.getElementById("error-state");
+  const errorMessage = document.getElementById("error-message");
+  const errorDismissBtn = document.getElementById("error-dismiss-btn");
+
+  const statsContainer = document.getElementById("stats-container");
+  const fileNameDisplay = document.getElementById("file-name-display");
+  const fileSizeDisplay = document.getElementById("file-size-display");
+  const statWords = document.getElementById("stat-words");
+  const statPages = document.getElementById("stat-pages");
+  const statCharsSpaces = document.getElementById("stat-chars-spaces");
+  const statCharsNoSpaces = document.getElementById("stat-chars-nospaces");
+  const statReadingTime = document.getElementById("stat-reading-time");
+  const statSpeakingTime = document.getElementById("stat-speaking-time");
+  const scannedPdfWarning = document.getElementById("scanned-pdf-warning");
+
+  const breakdownContainer = document.getElementById("breakdown-container");
+  const breakdownPageCountBadge = document.getElementById("breakdown-page-count-badge");
+  const pageBreakdownTbody = document.getElementById("page-breakdown-tbody");
+  const pageSearchInput = document.getElementById("page-search-input") as HTMLInputElement | null;
+
+  const copySummaryBtn = document.getElementById("copy-summary-btn");
+  const copyIcon = document.getElementById("copy-icon");
+  const copiedIcon = document.getElementById("copied-icon");
+  const copyBtnText = document.getElementById("copy-btn-text");
+  const exportCsvBtn = document.getElementById("export-csv-btn");
+  const resetBtn = document.getElementById("reset-btn");
+
+  function showError(msg: string) {
+    if (errorMessage && errorState) {
+      errorMessage.textContent = msg;
+      errorState.classList.remove("hidden");
+    }
+    if (processingState) processingState.classList.add("hidden");
+    if (dropzone) dropzone.classList.remove("hidden");
+  }
+
+  function hideError() {
+    if (errorState) errorState.classList.add("hidden");
+  }
+
+  async function handleFile(file: File) {
+    if (!file) return;
+
+    if (!file.name.toLowerCase().endsWith(".pdf") && file.type !== "application/pdf") {
+      showError("Please select a valid PDF document (.pdf).");
+      return;
+    }
+
+    hideError();
+
+    // Show processing state
+    if (dropzone) dropzone.classList.add("hidden");
+    if (statsContainer) statsContainer.classList.add("hidden");
+    if (breakdownContainer) breakdownContainer.classList.add("hidden");
+    if (processingState) processingState.classList.remove("hidden");
+    if (processingProgressBar) processingProgressBar.style.width = "5%";
+
+    try {
+      const result = await analyzePDF(file, (current, total) => {
+        if (processingTitle) {
+          processingTitle.textContent = `Analyzing page ${current} of ${total}...`;
+        }
+        if (processingSubtitle) {
+          processingSubtitle.textContent = `${Math.round((current / total) * 100)}% complete`;
+        }
+        if (processingProgressBar) {
+          processingProgressBar.style.width = `${Math.max(5, Math.round((current / total) * 100))}%`;
+        }
+      });
+
+      currentResult = result;
+
+      // Hide processing state
+      if (processingState) processingState.classList.add("hidden");
+
+      // Populate Stats
+      if (fileNameDisplay) fileNameDisplay.textContent = result.fileName;
+      if (fileSizeDisplay) fileSizeDisplay.textContent = formatBytes(result.fileSizeBytes);
+      if (statWords) statWords.textContent = result.totalWords.toLocaleString();
+      if (statPages) statPages.textContent = result.totalPages.toLocaleString();
+      if (statCharsSpaces) statCharsSpaces.textContent = result.totalCharacters.toLocaleString();
+      if (statCharsNoSpaces) statCharsNoSpaces.textContent = result.totalCharactersNoSpaces.toLocaleString();
+      if (statReadingTime) statReadingTime.textContent = `${result.estimatedReadingTimeMinutes} min`;
+      if (statSpeakingTime) statSpeakingTime.textContent = `${result.estimatedSpeakingTimeMinutes} min`;
+
+      // Scanned Document Alert
+      if (scannedPdfWarning) {
+        if (result.isScannedOrImageOnly) {
+          scannedPdfWarning.classList.remove("hidden");
+        } else {
+          scannedPdfWarning.classList.add("hidden");
+        }
+      }
+
+      // Populate Page Breakdown Table
+      if (breakdownPageCountBadge) {
+        breakdownPageCountBadge.textContent = `${result.totalPages} ${result.totalPages === 1 ? "page" : "pages"}`;
+      }
+
+      if (pageBreakdownTbody) {
+        pageBreakdownTbody.innerHTML = result.pages
+          .map(
+            (p) => `
+          <tr class="hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors" data-page="${p.pageNumber}">
+            <td class="py-2.5 px-4 font-bold text-neutral-900 dark:text-neutral-100">Page ${p.pageNumber}</td>
+            <td class="py-2.5 px-4">${p.wordCount.toLocaleString()}</td>
+            <td class="py-2.5 px-4">${p.characterCount.toLocaleString()}</td>
+            <td class="py-2.5 px-4">${p.characterCountNoSpaces.toLocaleString()}</td>
+            <td class="py-2.5 px-4 text-right">
+              ${
+                p.hasText
+                  ? '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">Digital Text</span>'
+                  : '<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">No Text / Image</span>'
+              }
+            </td>
+          </tr>
+        `
+          )
+          .join("");
+      }
+
+      // Show Stats and Breakdown Containers
+      if (statsContainer) statsContainer.classList.remove("hidden");
+      if (breakdownContainer) breakdownContainer.classList.remove("hidden");
+
+      // Smooth scroll to results
+      statsContainer?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } catch (err: any) {
+      console.error("PDF Parsing Error:", err);
+      if (err?.name === "PasswordException") {
+        showError("This PDF is password protected. Please unlock the file and try again.");
+      } else {
+        showError(`Failed to process PDF: ${err?.message || "Corrupted or unreadable format"}`);
+      }
+    }
+  }
+
+  // Click dropzone to browse
+  dropzone?.addEventListener("click", () => {
+    fileInput?.click();
+  });
+
+  // Input file change
+  fileInput?.addEventListener("change", (e) => {
+    const target = e.target as HTMLInputElement;
+    if (target.files && target.files.length > 0) {
+      handleFile(target.files[0]);
+    }
+  });
+
+  // Drag and Drop Events
+  ["dragenter", "dragover"].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.add("border-neutral-900", "dark:border-white", "bg-neutral-100/80", "dark:bg-neutral-800/80");
+    });
+  });
+
+  ["dragleave", "drop"].forEach((eventName) => {
+    dropzone?.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropzone.classList.remove("border-neutral-900", "dark:border-white", "bg-neutral-100/80", "dark:bg-neutral-800/80");
+    });
+  });
+
+  dropzone?.addEventListener("drop", (e) => {
+    const dt = e.dataTransfer;
+    if (dt && dt.files && dt.files.length > 0) {
+      handleFile(dt.files[0]);
+    }
+  });
+
+  // Error dismiss button
+  errorDismissBtn?.addEventListener("click", () => {
+    hideError();
+  });
+
+  // Reset Button (Analyze Another PDF)
+  resetBtn?.addEventListener("click", () => {
+    currentResult = null;
+    if (fileInput) fileInput.value = "";
+    if (statsContainer) statsContainer.classList.add("hidden");
+    if (breakdownContainer) breakdownContainer.classList.add("hidden");
+    if (dropzone) dropzone.classList.remove("hidden");
+    hideError();
+  });
+
+  // Copy Summary Button
+  copySummaryBtn?.addEventListener("click", async () => {
+    if (!currentResult) return;
+
+    const summary = [
+      `PDF Document Analysis: ${currentResult.fileName}`,
+      `----------------------------------------`,
+      `• Total Words: ${currentResult.totalWords.toLocaleString()}`,
+      `• Total Pages: ${currentResult.totalPages.toLocaleString()}`,
+      `• Characters (with spaces): ${currentResult.totalCharacters.toLocaleString()}`,
+      `• Characters (no spaces): ${currentResult.totalCharactersNoSpaces.toLocaleString()}`,
+      `• Est. Reading Time: ${currentResult.estimatedReadingTimeMinutes} min (at 225 wpm)`,
+      `• Est. Speaking Time: ${currentResult.estimatedSpeakingTimeMinutes} min (at 130 wpm)`,
+      `• Document Type: ${currentResult.isScannedOrImageOnly ? "Scanned/Image Document (OCR Recommended)" : "Digital Text Document"}`,
+      `----------------------------------------`,
+      `100% Client-Side Privacy: Verified zero server uploads.`,
+      `https://pdfwordcounter.org`,
+    ].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      if (copyIcon && copiedIcon && copyBtnText) {
+        copyIcon.classList.add("hidden");
+        copiedIcon.classList.remove("hidden");
+        copyBtnText.textContent = "Copied!";
+        setTimeout(() => {
+          copyIcon.classList.remove("hidden");
+          copiedIcon.classList.add("hidden");
+          copyBtnText.textContent = "Copy Summary";
+        }, 2000);
+      }
+    } catch (e) {
+      console.error("Clipboard copy error:", e);
+    }
+  });
+
+  // Export CSV Button
+  exportCsvBtn?.addEventListener("click", () => {
+    if (!currentResult) return;
+
+    const csvContent = exportToCSV(currentResult);
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const cleanFileName = currentResult.fileName.replace(/\.pdf$/i, "");
+    a.href = url;
+    a.download = `${cleanFileName}-word-count-report.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // Page Search / Filter
+  pageSearchInput?.addEventListener("input", (e) => {
+    const query = (e.target as HTMLInputElement).value.trim().toLowerCase();
+    const rows = pageBreakdownTbody?.querySelectorAll("tr");
+    if (!rows) return;
+
+    rows.forEach((row) => {
+      const pageNum = row.getAttribute("data-page");
+      if (!query || (pageNum && pageNum.includes(query))) {
+        row.classList.remove("hidden");
+      } else {
+        row.classList.add("hidden");
+      }
+    });
+  });
+</script>

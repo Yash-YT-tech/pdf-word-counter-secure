@@ -1,0 +1,51 @@
+---
+---
+
+<div id="breakdown-container" class="hidden mt-8 w-full space-y-4 animate-fadeIn">
+  <!-- Table Section Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-200 dark:border-neutral-800 pb-3">
+    <div>
+      <h3 class="text-base font-semibold text-neutral-900 dark:text-neutral-100 flex items-center gap-2">
+        <span>Page-by-Page Breakdown</span>
+        <span id="breakdown-page-count-badge" class="px-2 py-0.5 rounded-full text-xs font-mono bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300">
+          0 pages
+        </span>
+      </h3>
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        Granular metrics per document sheet for billing and chapter analysis
+      </p>
+    </div>
+
+    <!-- Filter input -->
+    <div class="flex items-center gap-2">
+      <div class="relative">
+        <input
+          type="text"
+          id="page-search-input"
+          placeholder="Filter page number..."
+          class="w-44 px-3 py-1.5 text-xs rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-1 focus:ring-neutral-900 dark:focus:ring-white transition-all"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrollable Table Container -->
+  <div class="border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden bg-white dark:bg-neutral-900/40 shadow-sm">
+    <div class="max-h-96 overflow-y-auto overflow-x-auto">
+      <table class="w-full text-left text-xs">
+        <thead class="sticky top-0 z-10 bg-neutral-100/90 dark:bg-neutral-800/90 backdrop-blur-md text-neutral-600 dark:text-neutral-300 font-semibold border-b border-neutral-200 dark:border-neutral-700">
+          <tr>
+            <th class="py-3 px-4 w-20">Page #</th>
+            <th class="py-3 px-4">Words</th>
+            <th class="py-3 px-4">Characters (spaces)</th>
+            <th class="py-3 px-4">Characters (no spaces)</th>
+            <th class="py-3 px-4 text-right">Text Layer</th>
+          </tr>
+        </thead>
+        <tbody id="page-breakdown-tbody" class="divide-y divide-neutral-200/60 dark:divide-neutral-800/60 text-neutral-700 dark:text-neutral-300 font-mono">
+          <!-- Populated dynamically by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

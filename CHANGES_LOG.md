@@ -8,6 +8,17 @@
 
 ## 2026-09-15
 
+### `[FEAT]` Phase 2: Core PDF Tool Engine
+- Implemented `src/scripts/pdf-processor.ts` for 100% in-browser document parsing via Mozilla `pdfjs-dist`
+- Extracted metrics: Total Words, Pages, Characters (with & without spaces), Estimated Reading & Speaking times
+- Implemented diagnostic scanner to alert users on scanned/image-only PDFs lacking a digital text layer
+- Created `src/components/DropZone.astro` with animated drag-and-drop feedback, file picker, and dynamic progress bar
+- Created `src/components/StatsDisplay.astro` with 6 metric cards, memory sandbox badge, 1-click summary copy, CSV export, and reset
+- Created `src/components/PageBreakdown.astro` with per-page granular metrics table and instant page filter search
+- Self-hosted `pdf.worker.min.mjs` in `public/` for offline-capable, zero-CDN processing
+- Integrated interactive engine controller script in `src/pages/index.astro`
+- Verified clean production build (all pages compile in <1s)
+
 ### `[FEAT]` Temporary Visual Feedback Integration: Agentation
 - Installed `agentation` and `@astrojs/react` with React 19 dependencies
 - Created `src/components/AgentationWrapper.tsx` for client-side mounting
