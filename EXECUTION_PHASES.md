@@ -13,7 +13,7 @@ Scaffold     Layout &    Core PDF    SEO &       Deploy &    Analytics   AdSense
 & Skills     Design      Tool        Content     Domain      & Search    Monetize
              System      Engine                  Setup       Console
                                                                      
-[DONE ✅]   [NEXT ▶]   [PENDING]   [PENDING]   [PENDING]   [PENDING]   [PENDING]
+[DONE ✅]   [DONE ✅]   [NEXT ▶]   [PENDING]   [PENDING]   [PENDING]   [PENDING]
 ```
 
 ---
@@ -40,43 +40,43 @@ Scaffold     Layout &    Core PDF    SEO &       Deploy &    Analytics   AdSense
 
 ---
 
-## Phase 1: Layout System & Design Foundation 🔲 NEXT
+## Phase 1: Layout System & Design Foundation ✅ COMPLETE
 
-**Duration:** ~2–3 hours  
-**Prerequisite:** Phase 0 complete
+**Duration:** ~1 hour  
+**Status:** ✅ Done (2026-09-15)
 
-### Tasks:
-- [ ] Create `src/layouts/Layout.astro` — Base HTML shell
-  - Import `global.css` (Tailwind)
-  - Add `<meta>` charset, viewport, description, OG tags
-  - Add dark mode class toggle (`<html class="dark">`)
-  - Add Google Analytics 4 script placeholder (empty until Phase 5)
-  - Add JSON-LD Organization schema
-- [ ] Create `src/components/Header.astro`
-  - Logo/site name (text-based initially)
-  - Navigation links: Home, About, Contact
-  - Dark/light mode toggle button with system preference detection
-  - Mobile responsive hamburger menu
-- [ ] Create `src/components/Footer.astro`
-  - Privacy Policy, Terms, About, Contact links
-  - "Built with ❤️ — 100% Private" tagline
-  - Copyright notice
-- [ ] Set up `src/styles/global.css`
-  - Tailwind v4 import
-  - Custom CSS properties for theme colors (light/dark)
-  - Base typography scale
-  - Smooth transitions for theme switching
-- [ ] Create `src/scripts/theme-toggle.ts`
-  - Read `localStorage` theme preference
-  - Fall back to `prefers-color-scheme` media query
-  - Toggle `dark` class on `<html>` element
-  - Persist choice to `localStorage`
-- [ ] Create custom `src/pages/404.astro` error page
-- [ ] **Git commit:** `feat: add base layout, header, footer, dark mode system`
+### Completed Tasks:
+- [x] Create `src/layouts/Layout.astro` — Base HTML shell
+  - Import `global.css` (Tailwind v4)
+  - Add `<meta>` charset, viewport, description, OG tags, Twitter cards
+  - Anti-FOUC inline dark mode initialization script
+  - Google Analytics 4 placeholder
+  - WebApplication JSON-LD structured data schema
+- [x] Create `src/components/Header.astro`
+  - Brand logo with document icon and pulsing "100% Private" badge
+  - Navigation links (Tool, Why Private, How It Works, FAQ, About)
+  - Dark/light theme toggle button
+  - GitHub source code link
+  - Responsive mobile navigation drawer
+- [x] Create `src/components/Footer.astro`
+  - 100% Client-side privacy statement
+  - Tools & features directory
+  - Trust & legal navigation (Privacy Policy, Terms, About, Contact)
+  - Cloudflare Edge & copyright notice
+- [x] Set up `src/styles/global.css`
+  - Tailwind v4 `@import "tailwindcss";`
+  - Light and dark mode theme variables
+  - Minimal modern scrollbars
+  - Smooth theme transitions
+- [x] Create custom `src/pages/404.astro` error page
+- [x] Create initial legal & trust pages (`about.astro`, `contact.astro`, `privacy-policy.astro`, `terms.astro`)
+- [x] Create `public/robots.txt` and `public/_headers` (duplicate content blocker)
+- [x] Configure `site` URL in `astro.config.mjs` for automated sitemap generation
+- [x] Verified static build: 6 pages compiled cleanly in ~1 second
 
 ---
 
-## Phase 2: Core PDF Tool Engine 🔲
+## Phase 2: Core PDF Tool Engine 🔲 NEXT
 
 **Duration:** ~3–4 hours  
 **Prerequisite:** Phase 1 complete

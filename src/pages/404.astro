@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="404 — Page Not Found | PDF Word Counter"
+  description="The page you are looking for does not exist. Return to the PDF Word Counter tool."
+>
+  <div class="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 py-16">
+    <div class="max-w-md w-full text-center space-y-6">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-neutral-200/60 dark:bg-neutral-800/60 text-neutral-900 dark:text-neutral-100 text-2xl font-bold shadow-inner">
+        404
+      </div>
+
+      <div class="space-y-2">
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+          Page Not Found
+        </h1>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          The page or document link you requested could not be located. It might have been moved, renamed, or deleted.
+        </p>
+      </div>
+
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a
+          href="/"
+          class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-100 dark:text-neutral-900 text-sm font-medium transition-all shadow-sm active:scale-95"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Return to PDF Tool</span>
+        </a>
+        <a
+          href="/about"
+          class="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-sm font-medium transition-colors"
+        >
+          Learn About Us
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

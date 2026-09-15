@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pdfwordcounter.org/sitemap-index.xml

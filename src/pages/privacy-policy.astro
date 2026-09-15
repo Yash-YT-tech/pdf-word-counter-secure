@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Privacy Policy — Private PDF Word Counter"
+  description="Our strict zero-upload privacy commitment. How PDF Word Counter processes documents entirely within your browser memory."
+>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8">
+    <div class="space-y-2 border-b border-neutral-200 dark:border-neutral-800 pb-6">
+      <h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Privacy Policy
+      </h1>
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+        Last updated: September 15, 2026
+      </p>
+    </div>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">1. Our Fundamental Commitment: Zero Document Uploads</h2>
+        <p>
+          Unlike traditional web-based PDF utility websites, <strong>PDF Word Counter never uploads, transmits, stores, or analyzes your documents on remote servers</strong>.
+        </p>
+        <p>
+          All document parsing, text extraction, character analysis, and metric calculations occur locally in your client's web browser using JavaScript and Web Workers. When you close or refresh your browser tab, all extracted document data is immediately purged from RAM by your browser's garbage collector.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">2. Information We Do NOT Collect</h2>
+        <ul class="list-disc pl-5 space-y-1 text-neutral-600 dark:text-neutral-400">
+          <li>We do not collect or view your PDF file names or contents.</li>
+          <li>We do not store passwords, personal metadata, or text strings from your files.</li>
+          <li>We do not require user accounts, emails, or phone numbers to use the service.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">3. Analytics and Operational Logs</h2>
+        <p>
+          To maintain service reliability and understand generic usage patterns, we may utilize privacy-friendly web analytics (such as Google Analytics 4). These tools collect aggregated, non-personally identifiable technical parameters including:
+        </p>
+        <ul class="list-disc pl-5 space-y-1 text-neutral-600 dark:text-neutral-400">
+          <li>Browser type, operating system, and screen resolution.</li>
+          <li>Referring URL and country of origin.</li>
+          <li>General page navigation paths and session durations.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">4. Advertising & Cookies</h2>
+        <p>
+          This website may serve non-intrusive programmatic advertisements provided by Google AdSense and third-party advertising partners to fund ongoing maintenance. Third-party vendors, including Google, use cookies to serve ads based on prior visits to this or other websites. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 underline">Google Ads Settings</a>.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">5. Contact Information</h2>
+        <p>
+          If you have questions regarding this Privacy Policy or our client-side architecture, contact us at: <a href="mailto:support@pdfwordcounter.org" class="text-blue-600 dark:text-blue-400 underline">support@pdfwordcounter.org</a>.
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

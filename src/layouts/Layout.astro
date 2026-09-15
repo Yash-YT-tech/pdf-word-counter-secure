@@ -1,0 +1,130 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: string;
+}
+
+const {
+  title = "PDF Word Counter — Free & 100% Private Client-Side Word Counter",
+  description = "Count words, characters, pages, and reading time in PDF documents directly in your browser. 100% private — your files never leave your device. Fast, free, no signup.",
+  keywords = "pdf word counter, count words in pdf, pdf page counter, count characters in pdf, pdf reading time, private pdf word counter, client side pdf word counter, free pdf word counter",
+  canonicalUrl = Astro.url.href,
+  ogImage = "/og-image.png",
+  ogType = "website",
+} = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.href : "https://pdfwordcounter.org";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Favicon Suite -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="PDF Word Counter" />
+
+    <!-- Twitter Cards -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Anti-FOUC Dark Mode Inline Script -->
+    <script is:inline>
+      (function () {
+        try {
+          const stored = localStorage.getItem("theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (stored === "dark" || (!stored && prefersDark)) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {
+          // Fallback if localStorage is inaccessible
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.documentElement.classList.add("dark");
+          }
+        }
+      })();
+    </script>
+
+    <!-- Schema.org JSON-LD Structured Data: WebApplication -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "PDF Word Counter",
+        "url": "https://pdfwordcounter.org",
+        "description": "A high-precision, client-side tool to count words, pages, characters, and reading time in PDF documents with zero server uploads.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All modern web browsers",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "100% Client-side private processing",
+          "Accurate word and character counts",
+          "Page-by-page breakdown table",
+          "Reading and speaking time estimator",
+          "Scanned PDF diagnostic detector",
+          "Export report to CSV",
+          "Copy summary to clipboard"
+        ]
+      }
+    </script>
+
+    <!-- Google Analytics 4 (Ready for GA4 Measurement ID) -->
+    <!-- Replace G-XXXXXXXXXX with your actual Measurement ID during Phase 5 -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+  </head>
+  <body class="min-h-screen flex flex-col bg-neutral-50 dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 selection:bg-neutral-900 selection:text-white dark:selection:bg-neutral-100 dark:selection:text-neutral-900">
+    <Header currentPath={Astro.url.pathname} />
+    <main class="flex-1 w-full">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

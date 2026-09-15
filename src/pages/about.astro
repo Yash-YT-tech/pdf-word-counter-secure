@@ -1,0 +1,67 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="About Us — Private PDF Word Counter"
+  description="Learn why we built the Private PDF Word Counter — an offline, in-browser document analytics tool built with zero cloud uploads."
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24 space-y-12">
+    <!-- Header -->
+    <div class="space-y-4 text-center max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+        Our Mission
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Confidential Document Analytics for Everyone
+      </h1>
+      <p class="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed">
+        We believe you shouldn't have to upload sensitive legal briefs, research papers, or financial filings to an unknown remote server just to count words.
+      </p>
+    </div>
+
+    <!-- Core Values Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+      <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40 space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+          🔒
+        </div>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">100% In-Browser Privacy</h2>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Files are parsed in local browser memory via WebAssembly and Web Workers. No bytes ever leave your device.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40 space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
+          ⚡
+        </div>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Sub-Second Speed</h2>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          Zero network upload latency. Even 100+ page documents are processed in seconds directly on your device's CPU.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40 space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold">
+          🆓
+        </div>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Zero Paywalls or Accounts</h2>
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          No sign-ups, no subscriptions, and no email gating. An honest, single-purpose tool that just works.
+        </p>
+      </div>
+    </div>
+
+    <!-- Back to tool CTA -->
+    <div class="text-center pt-8">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-white dark:hover:bg-neutral-100 dark:text-neutral-900 text-sm font-semibold transition-all shadow-sm"
+      >
+        <span>Open Word Counter Tool</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </a>
+    </div>
+  </div>
+</Layout>

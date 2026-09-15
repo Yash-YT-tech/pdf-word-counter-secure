@@ -8,6 +8,17 @@
 
 ## 2026-09-15
 
+### `[FEAT]` Phase 1: Layout System & Design Foundation
+- Created `src/layouts/Layout.astro` base HTML shell with full SEO meta tags, Open Graph, Twitter Cards, WebApplication JSON-LD schema, and anti-FOUC dark mode script
+- Created `src/components/Header.astro` with sticky blur effect, brand logo, 100% private pulse pill, navigation links, dark/light theme toggle, GitHub link, and responsive mobile menu drawer
+- Created `src/components/Footer.astro` with privacy statement, legal pages navigation, utility links, and Cloudflare Edge badge
+- Updated `src/styles/global.css` with Tailwind v4 custom theme tokens, dark mode variables, and minimal scrollbars
+- Created custom `src/pages/404.astro` error page with navigation back to tool
+- Created trust & legal pages: `src/pages/about.astro`, `src/pages/contact.astro`, `src/pages/privacy-policy.astro`, and `src/pages/terms.astro`
+- Updated `src/pages/index.astro` with hero section, tool container scaffold, and why-private value comparison matrix
+- Configured `public/robots.txt` and `public/_headers` (duplicate content blocker for Cloudflare `*.pages.dev`)
+- Updated `astro.config.mjs` with `site` URL for automated `sitemap-index.xml` builds
+
 ### `[INIT]` Project Scaffold & Foundation
 - Initialized AstroJS v7.3 project from minimal template
 - Installed core dependencies: `pdfjs-dist@6.3`, `tailwindcss@4.3`, `@tailwindcss/vite@4.3`, `@astrojs/sitemap@3.7`
