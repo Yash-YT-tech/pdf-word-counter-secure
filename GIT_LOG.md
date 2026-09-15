@@ -65,7 +65,7 @@ chore: update pdfjs-dist to latest version
 
 | # | Hash | Message | Date |
 |---|---|---|---|
-| 6 | `pending` | `feat: integrate temporary Agentation visual feedback toolbar and skills` | 2026-09-15 |
+| 6 | `79f235b` | `feat: integrate temporary Agentation visual feedback toolbar and skills` | 2026-09-15 |
 | 5 | `9b07b6a` | `feat: implement layout system, header, footer, dark mode, 404, legal pages, robots.txt, and sitemap` | 2026-09-15 |
 
 ### Phase 0: Scaffold & Foundation
