@@ -65,7 +65,12 @@ chore: update pdfjs-dist to latest version
 
 | # | Hash | Message | Date |
 |---|---|---|---|
-| 1 | `9fe84bf` | `feat: scaffold AstroJS project with Tailwind v4, sitemap, pdfjs-dist, and Vercel design system` | 2026-09-15 |
+| 3 | `5c9a975` | `docs: add project documentation (AGENTS, PLAN, ARCHITECTURE, EXECUTION_PHASES, CHANGES_LOG, PROGRESS_LOG, GIT_LOG) and install 26+ design/engineering skills (Impeccable, Emil Kowalski, Taste, Vercel)` | 2026-09-15 |
+| 2 | `230ef07` | `feat: scaffold AstroJS project with Tailwind v4, sitemap, pdfjs-dist, and Vercel design system` | 2026-09-15 |
+| 1 | `7f6fd39` | `Initial commit (from GitHub repo)` | 2026-09-15 |
+
+- **Remote Origin:** `https://github.com/Yash-YT-tech/pdf-word-counter-secure.git` (tracked on `main`)
+
 
 ---
 
