@@ -6,59 +6,91 @@ import Layout from "../layouts/Layout.astro";
   title="Privacy Policy — Private PDF Word Counter"
   description="Our strict zero-upload privacy commitment. How PDF Word Counter processes documents entirely within your browser memory."
 >
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-10">
     <div class="space-y-2 border-b border-neutral-200 dark:border-neutral-800 pb-6">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+        GDPR & CCPA Compliant
+      </div>
       <h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
         Privacy Policy
       </h1>
       <p class="text-sm text-neutral-500 dark:text-neutral-400">
-        Last updated: September 15, 2026
+        Effective Date: September 15, 2026
       </p>
     </div>
 
-    <div class="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+    <div class="prose prose-neutral dark:prose-invert max-w-none space-y-8 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
       <section class="space-y-3">
-        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">1. Our Fundamental Commitment: Zero Document Uploads</h2>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">1. Our Core Privacy Commitment: Zero Server Uploads</h2>
         <p>
-          Unlike traditional web-based PDF utility websites, <strong>PDF Word Counter never uploads, transmits, stores, or analyzes your documents on remote servers</strong>.
+          At <strong>PDF Word Counter</strong>, user confidentiality is our highest architecture priority. Unlike traditional online PDF utilities, <strong>our application does not upload, copy, store, or transmit your PDF files to any remote server or third-party cloud provider</strong>.
         </p>
         <p>
-          All document parsing, text extraction, character analysis, and metric calculations occur locally in your client's web browser using JavaScript and Web Workers. When you close or refresh your browser tab, all extracted document data is immediately purged from RAM by your browser's garbage collector.
+          All PDF parsing, text stream extraction, word counting, and metric calculations execute 100% locally within your device's browser memory (RAM) using Mozilla's open-source WebAssembly/JavaScript <code class="text-xs font-mono bg-neutral-100 dark:bg-neutral-800 px-1 py-0.5 rounded">pdfjs-dist</code> engine. Once you close or reload the browser tab, all extracted document data is automatically cleared from your computer's RAM.
         </p>
       </section>
 
       <section class="space-y-3">
         <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">2. Information We Do NOT Collect</h2>
-        <ul class="list-disc pl-5 space-y-1 text-neutral-600 dark:text-neutral-400">
-          <li>We do not collect or view your PDF file names or contents.</li>
-          <li>We do not store passwords, personal metadata, or text strings from your files.</li>
-          <li>We do not require user accounts, emails, or phone numbers to use the service.</li>
+        <ul class="list-disc pl-5 space-y-1.5 text-neutral-600 dark:text-neutral-400">
+          <li><strong>Document Content:</strong> We never see or retain any text, numbers, images, or formatting from your PDFs.</li>
+          <li><strong>File Names & Metadata:</strong> File paths, creation timestamps, and author tags never leave your device.</li>
+          <li><strong>Personal Identifiers:</strong> We do not ask for your name, email address, physical location, or billing details.</li>
+          <li><strong>Document Passwords:</strong> Passwords entered for encrypted files are never logged or transmitted.</li>
         </ul>
       </section>
 
       <section class="space-y-3">
-        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">3. Analytics and Operational Logs</h2>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">3. Web Analytics & Operational Telemetry</h2>
         <p>
-          To maintain service reliability and understand generic usage patterns, we may utilize privacy-friendly web analytics (such as Google Analytics 4). These tools collect aggregated, non-personally identifiable technical parameters including:
+          To monitor service stability and prevent software bugs, we may collect aggregated, non-personally identifiable diagnostic data via privacy-focused analytics tools (such as Google Analytics 4). This includes:
         </p>
         <ul class="list-disc pl-5 space-y-1 text-neutral-600 dark:text-neutral-400">
-          <li>Browser type, operating system, and screen resolution.</li>
-          <li>Referring URL and country of origin.</li>
-          <li>General page navigation paths and session durations.</li>
+          <li>General device categories (e.g., Desktop vs. Mobile) and browser types.</li>
+          <li>Coarse geographic location (Country/Region level only; never exact GPS coordinates).</li>
+          <li>High-level navigation metrics (e.g., page load duration, user referral origin).</li>
         </ul>
       </section>
 
       <section class="space-y-3">
-        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">4. Advertising & Cookies</h2>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">4. Third-Party Advertising & Cookies (Google AdSense)</h2>
         <p>
-          This website may serve non-intrusive programmatic advertisements provided by Google AdSense and third-party advertising partners to fund ongoing maintenance. Third-party vendors, including Google, use cookies to serve ads based on prior visits to this or other websites. You may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener" class="text-blue-600 dark:text-blue-400 underline">Google Ads Settings</a>.
+          This website may display advertisements served by Google AdSense to finance infrastructure and hosting costs. Google and third-party advertising vendors use cookies to serve ads based on prior visits to this website or other web properties:
+        </p>
+        <ul class="list-disc pl-5 space-y-1 text-neutral-600 dark:text-neutral-400">
+          <li>Google's use of advertising cookies enables it and its partners to serve ads to our users based on their visit to our sites and/or other sites on the Internet.</li>
+          <li>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 underline">Google Ads Settings</a> or <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 underline">aboutads.info</a>.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">5. European Privacy Rights (GDPR Compliance)</h2>
+        <p>
+          For individuals residing in the European Economic Area (EEA), under the General Data Protection Regulation (GDPR), you possess rights regarding personal data processing. Because our core service does not collect, store, or process personal data on servers, your documents are never transferred outside your local device. For questions regarding analytics cookie choices, you may manage cookie preferences in your browser settings.
         </p>
       </section>
 
       <section class="space-y-3">
-        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">5. Contact Information</h2>
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">6. California Privacy Rights (CCPA / CPRA)</h2>
         <p>
-          If you have questions regarding this Privacy Policy or our client-side architecture, contact us at: <a href="mailto:support@pdfwordcounter.org" class="text-blue-600 dark:text-blue-400 underline">support@pdfwordcounter.org</a>.
+          Under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA), California residents have the right to know whether personal information is sold or shared. <strong>We do not sell, rent, or trade your personal information or document files to any third party</strong>.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">7. Changes to This Privacy Policy</h2>
+        <p>
+          We may update our Privacy Policy occasionally to reflect architectural enhancements or regulatory changes. Any updates will be posted on this page with an amended "Effective Date".
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">8. Contact Us</h2>
+        <p>
+          If you have any questions, concerns, or requests regarding this Privacy Policy, please reach out directly:
+        </p>
+        <p>
+          <strong>Email:</strong> <a href="mailto:support@pdfwordcounter.org" class="text-blue-600 dark:text-blue-400 underline">support@pdfwordcounter.org</a>
         </p>
       </section>
     </div>

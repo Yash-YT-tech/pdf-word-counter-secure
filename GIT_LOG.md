@@ -61,6 +61,12 @@ chore: update pdfjs-dist to latest version
 
 ## Commit History
 
+### Phase 3: SEO Content & Legal Pages
+
+| # | Hash | Message | Date |
+|---|---|---|---|
+| 8 | `pending` | `seo: add 1000+ word editorial guide, FAQ accordion with FAQPage schema, and comprehensive legal pages` | 2026-09-15 |
+
 ### Phase 2: Core PDF Tool Engine
 
 | # | Hash | Message | Date |

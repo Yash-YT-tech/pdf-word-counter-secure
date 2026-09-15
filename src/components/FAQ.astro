@@ -1,0 +1,106 @@
+---
+const faqs = [
+  {
+    question: "How do I count words in a PDF file for free?",
+    answer:
+      "Simply drag and drop your PDF file into the drop zone at the top of this page, or click 'Browse' to select a document from your computer or smartphone. The tool will parse the document entirely inside your web browser and display the total word count, character count, page count, and reading duration in less than a second.",
+  },
+  {
+    question: "Is it safe to count words in confidential, legal, or NDA-protected documents here?",
+    answer:
+      "Yes, 100%. Unlike conventional web converters, our tool does not upload your PDF to any remote server or cloud infrastructure. All document processing takes place entirely in your browser's local memory (RAM) via client-side Web Workers. Your data is never transmitted, cached, or seen by anyone.",
+  },
+  {
+    question: "Why does my PDF show 0 words even though there is text visible on the page?",
+    answer:
+      "If your document was created by scanning physical paper or photographing a book, the PDF contains bitmap images of text rather than a machine-readable digital text stream. To count words in scanned documents, run Optical Character Recognition (OCR) software on your file to embed a searchable text layer.",
+  },
+  {
+    question: "How are the estimated reading and speaking times calculated?",
+    answer:
+      "Estimated reading time is calculated using the widely accepted average adult reading speed of 225 words per minute (wpm). Estimated speaking time is calculated using standard presentation speech cadence of 130 words per minute, ideal for conference talks and podcast preparation.",
+  },
+  {
+    question: "Can I export the page-by-page word count breakdown to Excel or Google Sheets?",
+    answer:
+      "Yes! After your PDF is analyzed, click the 'Export CSV' button in the results toolbar. This downloads a structured spreadsheet report with per-page metrics including word counts, character counts with spaces, character counts without spaces, and text status.",
+  },
+  {
+    question: "Is there a file size or page count restriction?",
+    answer:
+      "No artificial limits are imposed. Because files are processed directly on your device's hardware rather than a rate-limited cloud server, you can process documents with hundreds of pages. The only constraint is your device's available memory.",
+  },
+  {
+    question: "Does this tool work on mobile devices (iOS / Android)?",
+    answer:
+      "Yes. The interface is fully responsive and optimized for touchscreens on iPhones, iPads, and Android devices. You can choose any PDF from your mobile Files app or cloud storage.",
+  },
+  {
+    question: "Does this PDF word counter work offline without an internet connection?",
+    answer:
+      "Yes. Once the webpage has loaded initially in your browser, all PDF parsing scripts and workers are fully cached. You can disconnect your Wi-Fi or turn on Airplane Mode, and the tool will continue to function flawlessly.",
+  },
+  {
+    question: "How does this compare to Microsoft Word or Adobe Acrobat Pro word counters?",
+    answer:
+      "Adobe Acrobat Pro requires an expensive monthly Creative Cloud subscription, while Microsoft Word often corrupts PDF layout structures when converting them to editable documents. Our tool inspects the native PDF content stream directly, providing instant accuracy with zero cost and zero installation.",
+  },
+  {
+    question: "Do I need to create an account, register, or enter payment details?",
+    answer:
+      "No. PDF Word Counter is 100% free with no account creation, no email signups, no subscriptions, and no paywalls. It is a pure, single-purpose utility built for speed and privacy.",
+  },
+];
+---
+
+<section id="faq" class="py-16 sm:py-24 border-t border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-950/20">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
+    <!-- Header -->
+    <div class="text-center space-y-3 max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+        Frequently Asked Questions
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Common Questions About PDF Word Counting
+      </h2>
+      <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400">
+        Clear answers regarding privacy, accuracy, file formats, and features.
+      </p>
+    </div>
+
+    <!-- Accordion Items -->
+    <div class="space-y-3">
+      {
+        faqs.map((faq, index) => (
+          <details class="group border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/50 rounded-2xl p-5 sm:p-6 transition-all [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold text-neutral-900 dark:text-neutral-100 text-sm sm:text-base focus:outline-none">
+              <span>{faq.question}</span>
+              <span class="ml-4 flex-shrink-0 text-neutral-400 dark:text-neutral-500 transition-transform duration-200 group-open:rotate-180">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="mt-4 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed border-t border-neutral-100 dark:border-neutral-800/80 pt-4">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- JSON-LD FAQPage Structured Data -->
+  <script type="application/ld+json" is:inline set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((f) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.answer,
+      },
+    })),
+  })} />
+</section>

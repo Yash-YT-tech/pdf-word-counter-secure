@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import DropZone from "../components/DropZone.astro";
 import StatsDisplay from "../components/StatsDisplay.astro";
 import PageBreakdown from "../components/PageBreakdown.astro";
+import SEOContent from "../components/SEOContent.astro";
+import FAQ from "../components/FAQ.astro";
 ---
 
 <Layout
@@ -177,6 +179,12 @@ import PageBreakdown from "../components/PageBreakdown.astro";
       </div>
     </div>
   </section>
+
+  <!-- In-Depth Editorial Guide (1000+ Words for SEO & AdSense) -->
+  <SEOContent />
+
+  <!-- FAQ Accordion with JSON-LD FAQPage Schema -->
+  <FAQ />
 </Layout>
 
 <script>

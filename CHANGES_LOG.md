@@ -8,6 +8,17 @@
 
 ## 2026-09-15
 
+### `[SEO]` Phase 3: SEO Content & Legal Pages
+- Created `src/components/SEOContent.astro` featuring a 1,000+ word editorial authority guide on PDF text streams, ligatures, OCR diagnostics, and industry use cases
+- Added an architectural comparison table: Client-Side vs. Cloud PDF Converters
+- Created `src/components/FAQ.astro` with 10 high-value search questions and answers in an accessible accordion UI
+- Embedded structured JSON-LD `FAQPage` schema on the homepage for Google search rich snippets
+- Enriched `src/pages/privacy-policy.astro` with complete GDPR Articles 15-22, CCPA/CPRA, and Google AdSense cookie notices
+- Enriched `src/pages/terms.astro` with explicit user document IP ownership, service scope, and liability protections
+- Enriched `src/pages/about.astro` with client-side Web Worker architecture, open-source verification, and problem-solution breakdown
+- Enriched `src/pages/contact.astro` with direct support email, 24-48h response commitment, and GitHub issue tracker links
+- Verified production build: all 6 static routes and sitemap compile in ~1s
+
 ### `[FEAT]` Phase 2: Core PDF Tool Engine
 - Implemented `src/scripts/pdf-processor.ts` for 100% in-browser document parsing via Mozilla `pdfjs-dist`
 - Extracted metrics: Total Words, Pages, Characters (with & without spaces), Estimated Reading & Speaking times

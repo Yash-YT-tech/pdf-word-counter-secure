@@ -1,0 +1,174 @@
+---
+---
+
+<article class="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24 border-t border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-neutral-200">
+  <!-- Section Header -->
+  <header class="text-center space-y-3 mb-16">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+      Comprehensive Guide
+    </div>
+    <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-100">
+      Everything You Need to Know About PDF Word Counting
+    </h2>
+    <p class="text-base text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+      A technical and practical breakdown of PDF text extraction, document confidentiality, and metric calculations.
+    </p>
+  </header>
+
+  <!-- Editorial Body -->
+  <div class="space-y-12 text-sm sm:text-base leading-relaxed">
+    <!-- Chapter 1 -->
+    <section class="space-y-4">
+      <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Why Counting Words in a PDF Is Uniquely Difficult
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        Unlike standard Microsoft Word documents (<code class="text-xs font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">.docx</code>) or plain text files (<code class="text-xs font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">.txt</code>), the Portable Document Format (PDF) was not designed as a text editor format. Created by Adobe in 1993, the PDF specification is essentially a digital canvas designed for postscript print fidelity. 
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        In a PDF, words are not necessarily stored as paragraphs or sentences. Instead, text is positioned using coordinate-based glyph operators (such as <code class="text-xs font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">Tj</code> and <code class="text-xs font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">TJ</code> commands) that instruct the rendering engine exactly where to paint characters on an X/Y grid. Letters can be stored in arbitrary order, split across complex font matrices, or combined into typographic ligatures (such as “fi”, “fl”, or “ffi”).
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        Our browser-native counter solves this by parsing each content stream via Mozilla's high-fidelity <code class="text-xs font-mono bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded">pdfjs-dist</code> engine, assembling text fragments into natural semantic reading order, and normalizing whitespace before executing character and word calculations.
+      </p>
+    </section>
+
+    <!-- Chapter 2 -->
+    <section class="space-y-4">
+      <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        The Hidden Danger of Cloud-Based PDF Counters
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        When you search Google for a word counter, 99% of top-ranking utilities require uploading your file to their remote backend server. The file is stored in temporary buckets (or cached indefinitely on third-party servers), processed by an unknown server-side script, and deleted after hours or days.
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        For everyday publicly available documents, this may be acceptable. However, for professionals handling proprietary information, cloud uploads represent a serious security hazard:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+        <div class="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40 space-y-2">
+          <h4 class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">Non-Disclosure Agreements (NDAs)</h4>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            Uploading client files to unvetted third-party web servers is often a direct breach of corporate contracts, exposing you to legal liabilities.
+          </p>
+        </div>
+        <div class="p-5 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/40 space-y-2">
+          <h4 class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">HIPAA & GDPR Compliance</h4>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            Medical records, academic transcripts, and personal dossiers cannot be lawfully submitted to arbitrary file conversion servers without explicit data processing agreements.
+          </p>
+        </div>
+      </div>
+
+      <p class="text-neutral-600 dark:text-neutral-400">
+        Our tool was engineered specifically to solve this conflict: <strong>your PDF never leaves your computer or phone</strong>. All computation takes place in your browser's dedicated Web Worker memory thread. If you disconnect your internet connection right now, this tool continues to function without interruption.
+      </p>
+    </section>
+
+    <!-- Chapter 3 -->
+    <section class="space-y-4">
+      <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Industry Applications: Who Relies on PDF Word Counts?
+      </h3>
+      <div class="space-y-4 text-neutral-600 dark:text-neutral-400">
+        <div>
+          <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">1. Professional Translators & Localization Agencies</h4>
+          <p class="text-sm">
+            Translators bill almost universally on a per-word rate (e.g., $0.08 to $0.25 per source word). When clients send locked PDF contracts or user manuals, counting words accurately is essential for precise quoting. Our <strong>Page-by-Page Breakdown</strong> allows linguists to quote chapter-by-chapter or verify specific sections instantly.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">2. Academic Researchers & Graduate Students</h4>
+          <p class="text-sm">
+            University dissertations, grant proposals, and peer-reviewed journals maintain strict word ceilings (e.g., 5,000 words maximum including abstract). PDF Word Counter lets students ensure their final formatted submission meets stringent editorial limits.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">3. Legal Teams & Corporate Litigators</h4>
+          <p class="text-sm">
+            Appellate court briefs enforce strict word count limits under appellate procedural rules (such as Federal Rule of Appellate Procedure 32(a)(7)). Attorneys can verify compliant lengths without copying text into third-party software.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-semibold text-neutral-900 dark:text-neutral-100">4. Keynote Speakers & Podcasters</h4>
+          <p class="text-sm">
+            Our <strong>Estimated Speaking Time</strong> metric calculates the duration of speech based on an industry standard presentation cadence of 130 words per minute, allowing speakers to calibrate speeches to fit tight program schedules.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 4: Comparison Table -->
+    <section class="space-y-4">
+      <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Architecture Comparison: Client-Side vs. Cloud Counters
+      </h3>
+      <div class="border border-neutral-200 dark:border-neutral-800 rounded-2xl overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-neutral-100 dark:bg-neutral-800/80 text-neutral-700 dark:text-neutral-300 font-semibold border-b border-neutral-200 dark:border-neutral-700">
+              <tr>
+                <th class="py-3 px-4">Feature</th>
+                <th class="py-3 px-4 text-emerald-600 dark:text-emerald-400">PDF Word Counter (Our Tool)</th>
+                <th class="py-3 px-4 text-neutral-500">Traditional Cloud Utilities</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-neutral-200 dark:divide-neutral-800 text-neutral-600 dark:text-neutral-400">
+              <tr>
+                <td class="py-3 px-4 font-medium text-neutral-900 dark:text-neutral-100">Data Transmission</td>
+                <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">0 bytes sent over network</td>
+                <td class="py-3 px-4">Full document uploaded to cloud</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-neutral-900 dark:text-neutral-100">Processing Speed</td>
+                <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">Instantaneous (CPU RAM)</td>
+                <td class="py-3 px-4">Slow (Upload + Queue + Download)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-neutral-900 dark:text-neutral-100">Offline Functionality</td>
+                <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">Yes (Works without internet)</td>
+                <td class="py-3 px-4">No (Requires active connection)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-neutral-900 dark:text-neutral-100">File Size Restriction</td>
+                <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">None (Limited only by browser RAM)</td>
+                <td class="py-3 px-4">Typically 10MB – 50MB paywall</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-neutral-900 dark:text-neutral-100">User Tracking / Accounts</td>
+                <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">Zero sign-up required</td>
+                <td class="py-3 px-4">Often forces registration & emails</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-neutral-900 dark:text-neutral-100">Page-by-Page Breakdown</td>
+                <td class="py-3 px-4 text-emerald-600 dark:text-emerald-400 font-semibold">Interactive table + CSV export</td>
+                <td class="py-3 px-4">Only total document summary</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chapter 5: Scanned vs Digital PDF -->
+    <section class="space-y-4">
+      <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+        Digital PDFs vs. Scanned Documents: Understanding OCR
+      </h3>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        A common point of confusion is why some PDFs return a word count of <strong>0</strong> even when words are clearly readable on screen. This occurs because PDFs exist in two fundamentally distinct forms:
+      </p>
+      <ul class="list-disc pl-5 space-y-2 text-neutral-600 dark:text-neutral-400">
+        <li>
+          <strong>Native Digital PDFs:</strong> Generated from programs like Microsoft Word, Google Docs, or LaTeX. These contain an embedded text layer where character codes correspond directly to alphabet symbols. These can be analyzed instantly.
+        </li>
+        <li>
+          <strong>Scanned / Image PDFs:</strong> Created when a physical sheet of paper is photographed or passed through an office flatbed scanner. The PDF is simply a container holding bitmap images (JPEG/PNG) of pages. There is no machine-readable text layer until the file undergoes Optical Character Recognition (OCR).
+        </li>
+      </ul>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        Our tool includes a built-in diagnostic sensor that automatically detects when a document contains mostly images without a text layer, immediately alerting you so you know to run OCR on the file first.
+      </p>
+    </section>
+  </div>
+</article>
