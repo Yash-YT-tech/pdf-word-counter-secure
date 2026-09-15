@@ -180,8 +180,8 @@ export function calculateReadability(text: string, totalWords: number): Readabil
   if (ease >= 90) label = "Very Easy (5th Grade)";
   else if (ease >= 80) label = "Easy (6th Grade)";
   else if (ease >= 70) label = "Fairly Easy (7th Grade)";
-  else if (ease >= 60) label = "Standard (8th–9th Grade)";
-  else if (ease >= 50) label = "Fairly Difficult (10th–12th Grade)";
+  else if (ease >= 60) label = "Standard (8th-9th Grade)";
+  else if (ease >= 50) label = "Fairly Difficult (10th-12th Grade)";
   else if (ease >= 30) label = "Difficult (College Level)";
   else label = "Very Difficult (Graduate / Technical)";
 
