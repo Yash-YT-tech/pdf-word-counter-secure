@@ -65,7 +65,7 @@ chore: update pdfjs-dist to latest version
 
 | # | Hash | Message | Date |
 |---|---|---|---|
-| 9 | `PENDING` | `feat: add custom favicon suite, og-image, webmanifest, and a11y polish` | 2026-09-15 |
+| 9 | `532f684` | `feat: add custom favicon suite, og-image, webmanifest, and a11y polish` | 2026-09-15 |
 
 ### Phase 3: SEO Content & Legal Pages
 
