@@ -8,6 +8,13 @@
 
 ## 2026-09-15
 
+### `[FEAT]` Temporary Visual Feedback Integration: Agentation
+- Installed `agentation` and `@astrojs/react` with React 19 dependencies
+- Created `src/components/AgentationWrapper.tsx` for client-side mounting
+- Integrated Agentation toolbar in `src/layouts/Layout.astro` conditionally in development mode (`import.meta.env.DEV`)
+- Installed `agentation` and `agentation-self-driving` skills from `benjitaylor/agentation` into `.agents/skills/`
+- Verified development runtime mounting on port 4321 and zero-overhead production build
+
 ### `[FEAT]` Phase 1: Layout System & Design Foundation
 - Created `src/layouts/Layout.astro` base HTML shell with full SEO meta tags, Open Graph, Twitter Cards, WebApplication JSON-LD schema, and anti-FOUC dark mode script
 - Created `src/components/Header.astro` with sticky blur effect, brand logo, 100% private pulse pill, navigation links, dark/light theme toggle, GitHub link, and responsive mobile menu drawer
