@@ -61,6 +61,12 @@ chore: update pdfjs-dist to latest version
 
 ## Commit History
 
+### Phase 4: Polish, Favicon Suite & Pre-Deploy QA
+
+| # | Hash | Message | Date |
+|---|---|---|---|
+| 9 | `PENDING` | `feat: add custom favicon suite, og-image, webmanifest, and a11y polish` | 2026-09-15 |
+
 ### Phase 3: SEO Content & Legal Pages
 
 | # | Hash | Message | Date |

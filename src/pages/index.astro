@@ -341,6 +341,13 @@ import FAQ from "../components/FAQ.astro";
     fileInput?.click();
   });
 
+  dropzone?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      fileInput?.click();
+    }
+  });
+
   // Input file change
   fileInput?.addEventListener("change", (e) => {
     const target = e.target as HTMLInputElement;

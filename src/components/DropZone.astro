@@ -5,12 +5,16 @@
   <!-- Default Dropzone Box -->
   <div
     id="dropzone"
-    class="relative border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-neutral-800 dark:hover:border-neutral-200 bg-neutral-50/50 dark:bg-neutral-900/30 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/30 rounded-2xl p-8 sm:p-14 text-center transition-all cursor-pointer group"
+    tabindex="0"
+    role="button"
+    aria-label="Upload PDF document to count words, characters and pages"
+    class="relative border-2 border-dashed border-neutral-300 dark:border-neutral-700 hover:border-neutral-800 dark:hover:border-neutral-200 focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white bg-neutral-50/50 dark:bg-neutral-900/30 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/30 rounded-2xl p-8 sm:p-14 text-center transition-all cursor-pointer group"
   >
     <input
       type="file"
       id="pdf-file-input"
       accept="application/pdf,.pdf"
+      aria-label="Select PDF file"
       class="sr-only"
     />
 
