@@ -65,7 +65,7 @@ chore: update pdfjs-dist to latest version
 
 | # | Hash | Message | Date |
 |---|---|---|---|
-| 11 | `PENDING` | `feat: complete website perfection pass, programmatic sub-pages, motion polish, and end-to-end QA` | 2026-09-15 |
+| 11 | `684c67b` | `feat: complete website perfection pass, programmatic sub-pages, motion polish, and end-to-end QA` | 2026-09-15 |
 
 ### Phase 5 (Prep): Cloudflare Wrangler & Deploy Script
 
