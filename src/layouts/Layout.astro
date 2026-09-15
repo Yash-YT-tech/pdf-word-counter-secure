@@ -123,7 +123,7 @@ const siteUrl = Astro.site ? Astro.site.href : "https://pdfwordcounter.org";
   </head>
   <body class="min-h-screen flex flex-col bg-neutral-50 dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100 selection:bg-neutral-900 selection:text-white dark:selection:bg-neutral-100 dark:selection:text-neutral-900">
     <Header currentPath={Astro.url.pathname} />
-    <main class="flex-1 w-full">
+    <main class="flex-1 w-full overflow-x-hidden max-w-full">
       <slot />
     </main>
     <Footer />

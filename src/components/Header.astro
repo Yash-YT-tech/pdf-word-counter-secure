@@ -6,55 +6,50 @@ interface Props {
 const { currentPath = "/" } = Astro.props;
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-neutral-200/80 dark:border-neutral-800/80 bg-white/85 dark:bg-[#0a0a0a]/85 backdrop-blur-md transition-colors duration-200">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+<header class="sticky top-3 sm:top-4 z-50 w-full px-4 sm:px-6 pointer-events-none transition-all duration-300">
+  <div class="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border border-neutral-200/80 dark:border-neutral-800/80 rounded-full px-4 sm:px-6 h-14 shadow-lg shadow-neutral-950/5 dark:shadow-black/30">
     <!-- Brand Logo -->
     <a href="/" class="flex items-center gap-2.5 group transition-transform hover:opacity-95">
-      <div class="w-9 h-9 rounded-xl bg-neutral-900 dark:bg-white flex items-center justify-center text-white dark:text-neutral-900 shadow-sm transition-transform group-hover:scale-105">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="w-8 h-8 rounded-full bg-neutral-950 dark:bg-white flex items-center justify-center text-white dark:text-neutral-950 shadow-sm transition-transform duration-300 group-hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
           <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
           <path d="M10 13h4"></path>
           <path d="M10 17h4"></path>
         </svg>
       </div>
-      <div class="flex flex-col">
-        <div class="flex items-center gap-2">
-          <span class="font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 text-base">
-            PDF Word Counter
-          </span>
-          <span class="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            100% Private
-          </span>
-        </div>
-        <span class="text-[11px] text-neutral-500 dark:text-neutral-400 -mt-0.5 hidden sm:inline">
-          Browser-Based Client-Side Engine
+      <div class="flex items-center gap-2">
+        <span class="font-semibold tracking-tight text-neutral-950 dark:text-white text-sm sm:text-base">
+          PDF Word Counter
+        </span>
+        <span class="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          100% Private
         </span>
       </div>
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden lg:flex items-center gap-5 text-xs font-medium text-neutral-600 dark:text-neutral-400">
-      <a href="/" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Word Count</a>
-      <a href="/pdf-page-counter" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Page Count</a>
-      <a href="/pdf-character-counter" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Characters</a>
-      <a href="/pdf-reading-time" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Reading Time</a>
-      <a href="/#why-private" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Why Private?</a>
-      <a href="/#faq" class="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">FAQ</a>
+    <nav class="hidden lg:flex items-center gap-6 text-xs font-medium text-neutral-600 dark:text-neutral-400">
+      <a href="/" class="hover:text-neutral-950 dark:hover:text-white transition-colors duration-200">Word Count</a>
+      <a href="/pdf-page-counter" class="hover:text-neutral-950 dark:hover:text-white transition-colors duration-200">Page Count</a>
+      <a href="/pdf-character-counter" class="hover:text-neutral-950 dark:hover:text-white transition-colors duration-200">Characters</a>
+      <a href="/pdf-reading-time" class="hover:text-neutral-950 dark:hover:text-white transition-colors duration-200">Reading Time</a>
+      <a href="/#why-private" class="hover:text-neutral-950 dark:hover:text-white transition-colors duration-200">Why Private</a>
+      <a href="/#faq" class="hover:text-neutral-950 dark:hover:text-white transition-colors duration-200">FAQ</a>
     </nav>
 
-    <!-- Right Controls: Theme Toggle & GitHub -->
-    <div class="flex items-center gap-2.5">
+    <!-- Right Controls: Theme Toggle & GitHub & Mobile Menu -->
+    <div class="flex items-center gap-2">
       <!-- Theme Toggle Button -->
       <button
         id="theme-toggle-btn"
         type="button"
         aria-label="Toggle dark mode"
-        class="w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/60 transition-colors"
+        class="w-8 h-8 flex items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
       >
         <!-- Sun icon (shown in dark mode) -->
-        <svg id="theme-sun" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="theme-sun" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="4"></circle>
           <path d="M12 2v2"></path>
           <path d="M12 20v2"></path>
@@ -66,7 +61,7 @@ const { currentPath = "/" } = Astro.props;
           <path d="m19.07 4.93-1.41 1.41"></path>
         </svg>
         <!-- Moon icon (shown in light mode) -->
-        <svg id="theme-moon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="theme-moon" xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 block dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
         </svg>
       </button>
@@ -77,9 +72,9 @@ const { currentPath = "/" } = Astro.props;
         target="_blank"
         rel="noopener noreferrer"
         aria-label="View source code on GitHub"
-        class="w-9 h-9 hidden sm:flex items-center justify-center rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800/60 transition-colors"
+        class="w-8 h-8 hidden sm:flex items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
       >
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
         </svg>
       </a>
@@ -89,31 +84,31 @@ const { currentPath = "/" } = Astro.props;
         id="mobile-menu-btn"
         type="button"
         aria-label="Toggle Navigation Menu"
-        class="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+        class="lg:hidden w-8 h-8 flex items-center justify-center rounded-full border border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
       >
-        <svg id="menu-open-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="menu-open-icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
-        <svg id="menu-close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="menu-close-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
   </div>
 
-  <!-- Mobile Dropdown Navigation -->
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-[#0a0a0a]/95 backdrop-blur-lg px-4 pt-3 pb-5 space-y-2 text-sm font-medium">
-    <a href="/" class="block px-3 py-2 rounded-lg text-neutral-900 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">PDF Word Counter</a>
-    <a href="/pdf-page-counter" class="block px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">PDF Page Counter</a>
-    <a href="/pdf-character-counter" class="block px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">PDF Character Counter</a>
-    <a href="/pdf-reading-time" class="block px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">PDF Reading Time</a>
+  <!-- Mobile Dropdown Navigation Card -->
+  <div id="mobile-menu" class="hidden lg:hidden pointer-events-auto max-w-6xl mx-auto mt-2 rounded-2xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-2xl p-4 shadow-xl space-y-1 text-sm font-medium">
+    <a href="/" class="block px-3 py-2 rounded-xl text-neutral-950 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">PDF Word Counter</a>
+    <a href="/pdf-page-counter" class="block px-3 py-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">PDF Page Counter</a>
+    <a href="/pdf-character-counter" class="block px-3 py-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">PDF Character Counter</a>
+    <a href="/pdf-reading-time" class="block px-3 py-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">PDF Reading Time</a>
     <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800"></div>
-    <a href="/#why-private" class="block px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">Why Private?</a>
-    <a href="/#faq" class="block px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">FAQ</a>
-    <a href="/about" class="block px-3 py-2 rounded-lg text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">About</a>
+    <a href="/#why-private" class="block px-3 py-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">Why Private</a>
+    <a href="/#faq" class="block px-3 py-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">FAQ</a>
+    <a href="/about" class="block px-3 py-2 rounded-xl text-neutral-600 dark:text-neutral-400 hover:text-neutral-950 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800/80 transition-colors">About</a>
     <div class="pt-2 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between px-3">
       <span class="text-xs text-neutral-500">Source Code</span>
-      <a href="https://github.com/Yash-YT-tech/pdf-word-counter-secure" target="_blank" rel="noopener" class="text-xs font-semibold text-neutral-900 dark:text-neutral-100 underline">GitHub →</a>
+      <a href="https://github.com/Yash-YT-tech/pdf-word-counter-secure" target="_blank" rel="noopener" class="text-xs font-semibold text-neutral-950 dark:text-white underline">GitHub</a>
     </div>
   </div>
 </header>
@@ -140,7 +135,7 @@ const { currentPath = "/" } = Astro.props;
     });
 
     // Close mobile menu on link click
-    mobileMenu.querySelectorAll("a").forEach(link => {
+    mobileMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         mobileMenu.classList.add("hidden");
         openIcon.classList.remove("hidden");
